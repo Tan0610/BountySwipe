@@ -1,16 +1,8 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useRef, useState } from "react";
 import { SwipeCard } from "./SwipeCard";
-
-// TinderCard import - falls back to a simple draggable wrapper if not available
-let TinderCard: any;
-try {
-  TinderCard = require("react-tinder-card").default;
-} catch {
-  // Fallback: simple wrapper that passes through
-  TinderCard = null;
-}
+import TinderCard from "react-tinder-card";
 
 interface Creator {
   address: string;
@@ -72,7 +64,7 @@ export const SwipeDeck = ({ creators, onVote, onSkip, hasVoted }: SwipeDeckProps
     onSkip?.();
   };
 
-  const onCardLeftScreen = (_idx: number) => {
+  const onCardLeftScreen = () => {
     // Card has left the screen
   };
 
@@ -146,10 +138,7 @@ export const SwipeDeck = ({ creators, onVote, onSkip, hasVoted }: SwipeDeckProps
               className="absolute inset-0 flex justify-center"
               style={{
                 zIndex: totalCards - depth,
-                transform:
-                  depth === 0
-                    ? "none"
-                    : `scale(${1 - depth * 0.04}) translateY(${depth * -10}px)`,
+                transform: depth === 0 ? "none" : `scale(${1 - depth * 0.04}) translateY(${depth * -10}px)`,
                 opacity: depth === 0 ? 1 : 0.4 - depth * 0.15,
                 filter: depth > 0 ? `blur(${depth * 0.5}px)` : "none",
                 transition: "transform 0.3s ease, opacity 0.3s ease, filter 0.3s ease",
@@ -182,37 +171,40 @@ export const SwipeDeck = ({ creators, onVote, onSkip, hasVoted }: SwipeDeckProps
           // Wrap top card with TinderCard if available
           if (CardWrapper && index === currentIndex) {
             return (
-              <CardWrapper
+              <div
                 key={creator.address}
-                onSwipe={(dir: string) => onSwipe(dir, creator)}
-                onCardLeftScreen={() => onCardLeftScreen(index)}
-                preventSwipe={["down"]}
-                swipeRequirementType="position"
-                swipeThreshold={80}
                 className="absolute inset-0 flex justify-center"
                 style={{ zIndex: totalCards + 1 }}
               >
-                {lastDirection === "right" && (
-                  <div className="absolute inset-0 max-w-[400px] mx-auto rounded-2xl z-10 flex items-center justify-center pointer-events-none bg-green-500/10">
-                    <span className="text-green-400 text-3xl font-mono font-bold tracking-widest rotate-[-12deg] backdrop-blur-[2px] px-6 py-2">
-                      UPVOTE
-                    </span>
-                  </div>
-                )}
-                {lastDirection === "left" && (
-                  <div className="absolute inset-0 max-w-[400px] mx-auto rounded-2xl z-10 flex items-center justify-center pointer-events-none bg-red-500/10">
-                    <span className="text-red-400 text-3xl font-mono font-bold tracking-widest rotate-[12deg] backdrop-blur-[2px] px-6 py-2">
-                      PASS
-                    </span>
-                  </div>
-                )}
-                <SwipeCard
-                  creator={creator.address}
-                  contentURI={creator.contentURI}
-                  upvotes={creator.upvotes}
-                  downvotes={creator.downvotes}
-                />
-              </CardWrapper>
+                <CardWrapper
+                  onSwipe={(dir: string) => onSwipe(dir, creator)}
+                  onCardLeftScreen={() => onCardLeftScreen()}
+                  preventSwipe={["down"]}
+                  swipeRequirementType="position"
+                  swipeThreshold={80}
+                >
+                  {lastDirection === "right" && (
+                    <div className="absolute inset-0 max-w-[400px] mx-auto rounded-2xl z-10 flex items-center justify-center pointer-events-none bg-green-500/10">
+                      <span className="text-green-400 text-3xl font-mono font-bold tracking-widest rotate-[-12deg] backdrop-blur-[2px] px-6 py-2">
+                        UPVOTE
+                      </span>
+                    </div>
+                  )}
+                  {lastDirection === "left" && (
+                    <div className="absolute inset-0 max-w-[400px] mx-auto rounded-2xl z-10 flex items-center justify-center pointer-events-none bg-red-500/10">
+                      <span className="text-red-400 text-3xl font-mono font-bold tracking-widest rotate-[12deg] backdrop-blur-[2px] px-6 py-2">
+                        PASS
+                      </span>
+                    </div>
+                  )}
+                  <SwipeCard
+                    creator={creator.address}
+                    contentURI={creator.contentURI}
+                    upvotes={creator.upvotes}
+                    downvotes={creator.downvotes}
+                  />
+                </CardWrapper>
+              </div>
             );
           }
 
@@ -245,8 +237,19 @@ export const SwipeDeck = ({ creators, onVote, onSkip, hasVoted }: SwipeDeckProps
           disabled={!canSwipe}
           title="Skip"
         >
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-            <path strokeLinecap="round" strokeLinejoin="round" d="M3 8.689c0-.864.933-1.405 1.683-.974l7.108 4.086a1.125 1.125 0 010 1.953l-7.108 4.086A1.125 1.125 0 013 16.811V8.69zM12.75 8.689c0-.864.933-1.405 1.683-.974l7.108 4.086a1.125 1.125 0 010 1.953l-7.108 4.086a1.125 1.125 0 01-1.683-.974V8.69z" />
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-5 w-5"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            strokeWidth={2.5}
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M3 8.689c0-.864.933-1.405 1.683-.974l7.108 4.086a1.125 1.125 0 010 1.953l-7.108 4.086A1.125 1.125 0 013 16.811V8.69zM12.75 8.689c0-.864.933-1.405 1.683-.974l7.108 4.086a1.125 1.125 0 010 1.953l-7.108 4.086a1.125 1.125 0 01-1.683-.974V8.69z"
+            />
           </svg>
         </button>
 
