@@ -21,3 +21,16 @@ node_modules
 
 # cli
 dist
+
+# Secrets
+.env.local
+.env
+
+# Deployment artifacts (local)
+packages/hardhat/deployments/localhost/
+
+# Large video files
+packages/nextjs/public/videos/
+
+# BMAD output
+_bmad-output/

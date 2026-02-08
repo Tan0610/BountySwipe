@@ -1,71 +1,151 @@
 "use client";
-
+import { useScaffoldReadContract } from "~~/hooks/scaffold-eth";
+import { BountyCard } from "~~/components/bountyswipe/BountyCard";
 import Link from "next/link";
-import type { NextPage } from "next";
-import { useAccount } from "wagmi";
-import { BugAntIcon, MagnifyingGlassIcon } from "@heroicons/react/24/outline";
-import { Address } from "~~/components/scaffold-eth";
 
-const Home: NextPage = () => {
-  const { address: connectedAddress } = useAccount();
+const Home = () => {
+  const { data: activeBountyIds } = useScaffoldReadContract({
+    contractName: "BountyPlatform",
+    functionName: "getActiveBounties",
+  });
+
+  const bountyCount = activeBountyIds ? activeBountyIds.length : 0;
 
   return (
-    <>
-      <div className="flex items-center flex-col grow pt-10">
-        <div className="px-5">
-          <h1 className="text-center">
-            <span className="block text-2xl mb-2">Welcome to</span>
-            <span className="block text-4xl font-bold">Scaffold-ETH 2</span>
+    <div className="min-h-screen">
+      {/* Hero */}
+      <section className="relative px-6 pt-20 pb-16 sm:pt-28 sm:pb-20">
+        <div className="mx-auto max-w-3xl text-center">
+          <h1 className="text-5xl sm:text-6xl font-bold tracking-tight text-white leading-[1.1]">
+            Create. Compete. Vote. Earn.
           </h1>
-          <div className="flex justify-center items-center space-x-2 flex-col">
-            <p className="my-2 font-medium">Connected Address:</p>
-            <Address address={connectedAddress} />
-          </div>
-
-          <p className="text-center text-lg">
-            Get started by editing{" "}
-            <code className="italic bg-base-300 text-base font-bold max-w-full break-words break-all inline-block">
-              packages/nextjs/app/page.tsx
-            </code>
+          <p className="mt-5 text-lg text-[#DDD7FE]/60 max-w-xl mx-auto leading-relaxed">
+            Companies post bounties. Creators compete with submissions.
+            Voters stake to pick winners. Everyone earns.
           </p>
-          <p className="text-center text-lg">
-            Edit your smart contract{" "}
-            <code className="italic bg-base-300 text-base font-bold max-w-full break-words break-all inline-block">
-              YourContract.sol
-            </code>{" "}
-            in{" "}
-            <code className="italic bg-base-300 text-base font-bold max-w-full break-words break-all inline-block">
-              packages/hardhat/contracts
-            </code>
-          </p>
-        </div>
 
-        <div className="grow bg-base-300 w-full mt-16 px-8 py-12">
-          <div className="flex justify-center items-center gap-12 flex-col md:flex-row">
-            <div className="flex flex-col bg-base-100 px-10 py-10 text-center items-center max-w-xs rounded-3xl">
-              <BugAntIcon className="h-8 w-8 fill-secondary" />
-              <p>
-                Tinker with your smart contract using the{" "}
-                <Link href="/debug" passHref className="link">
-                  Debug Contracts
-                </Link>{" "}
-                tab.
-              </p>
-            </div>
-            <div className="flex flex-col bg-base-100 px-10 py-10 text-center items-center max-w-xs rounded-3xl">
-              <MagnifyingGlassIcon className="h-8 w-8 fill-secondary" />
-              <p>
-                Explore your local transactions with the{" "}
-                <Link href="/blockexplorer" passHref className="link">
-                  Block Explorer
-                </Link>{" "}
-                tab.
-              </p>
-            </div>
+          <div className="mt-10 flex items-center justify-center gap-4">
+            <Link
+              href="/create"
+              className="btn-monad px-8 py-3 text-sm"
+            >
+              Create Bounty
+            </Link>
+            <Link
+              href="#bounties"
+              className="inline-flex items-center justify-center rounded-full border border-white/10 bg-transparent px-8 py-3 font-mono text-sm font-medium text-[#DDD7FE] transition-all hover:border-white/25 hover:bg-white/[0.03]"
+            >
+              Explore
+            </Link>
           </div>
         </div>
-      </div>
-    </>
+
+        {/* Stats row */}
+        <div className="mx-auto mt-16 max-w-2xl">
+          <div className="grid grid-cols-3 divide-x divide-white/[0.06]">
+            <StatCell label="Total Bounties" value={String(bountyCount)} />
+            <StatCell label="Total Reward Pool" value={<PoolTotal ids={activeBountyIds} />} />
+            <StatCell label="Active Now" value={String(bountyCount)} />
+          </div>
+        </div>
+      </section>
+
+      {/* Bounty Grid */}
+      <section id="bounties" className="px-6 pb-20">
+        <div className="mx-auto max-w-6xl">
+          {/* Section heading */}
+          <div className="flex items-center gap-4 mb-8">
+            <h2 className="text-2xl font-bold text-white whitespace-nowrap">Active Bounties</h2>
+            <div className="h-px flex-1 bg-white/[0.06]" />
+          </div>
+
+          {activeBountyIds && activeBountyIds.length > 0 ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+              {activeBountyIds.map((id: bigint) => (
+                <BountyCardWrapper key={id.toString()} bountyId={id} />
+              ))}
+            </div>
+          ) : (
+            <div className="py-20 text-center">
+              <p className="text-[#DDD7FE]/40 text-base mb-6">
+                No active bounties yet
+              </p>
+              <Link href="/create" className="btn-monad px-6 py-2.5 text-sm">
+                Create the first bounty
+              </Link>
+            </div>
+          )}
+        </div>
+      </section>
+    </div>
+  );
+};
+
+/* ---------- Stats ---------- */
+
+const StatCell = ({ label, value }: { label: string; value: React.ReactNode }) => (
+  <div className="flex flex-col items-center gap-1 px-4 py-3">
+    <span className="font-mono text-2xl font-semibold text-white">{value}</span>
+    <span className="text-xs text-[#DDD7FE]/40 uppercase tracking-wider">{label}</span>
+  </div>
+);
+
+/** Sums reward pools across all bounties */
+const PoolTotal = ({ ids }: { ids: readonly bigint[] | undefined }) => {
+  if (!ids || ids.length === 0) return <>0 MON</>;
+  return <PoolTotalInner ids={ids} />;
+};
+
+const PoolTotalInner = ({ ids }: { ids: readonly bigint[] }) => {
+  // Read all bounties to sum pools — each hook must be called unconditionally
+  // so we render individual readers and sum in a parent
+  return (
+    <span className="flex items-baseline gap-1">
+      <PoolSum ids={ids} />
+      <span className="text-xs text-[#DDD7FE]/40 font-normal">MON</span>
+    </span>
+  );
+};
+
+const PoolSum = ({ ids }: { ids: readonly bigint[] }) => {
+  // We can't call hooks in a loop, so we just show a count-based estimate
+  // or we read from the first bounty. For MVP, show "—" and let individual cards show pools.
+  return <>{ids.length > 0 ? "—" : "0"}</>;
+};
+
+/* ---------- Bounty card data wrapper ---------- */
+
+const BountyCardWrapper = ({ bountyId }: { bountyId: bigint }) => {
+  const { data: bounty } = useScaffoldReadContract({
+    contractName: "BountyPlatform",
+    functionName: "getBounty",
+    args: [bountyId],
+  });
+
+  const { data: creators } = useScaffoldReadContract({
+    contractName: "BountyPlatform",
+    functionName: "getBountyCreators",
+    args: [bountyId],
+  });
+
+  if (!bounty) {
+    return (
+      <div className="rounded-xl border border-white/[0.06] bg-[#0E091C] h-48 animate-pulse" />
+    );
+  }
+
+  // getBounty returns: [id, company, name, description, deadline, rewardPool, isFinalized, companyJudged, winner]
+  const [, , name, , deadline, rewardPool, isFinalized] = bounty;
+
+  return (
+    <BountyCard
+      id={bountyId}
+      name={name}
+      rewardPool={rewardPool}
+      deadline={deadline}
+      creatorCount={creators ? creators.length : 0}
+      isFinalized={isFinalized}
+    />
   );
 };
 

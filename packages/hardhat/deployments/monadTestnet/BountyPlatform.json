@@ -1,0 +1,1408 @@
+{
+  "address": "0x52D036553ca07ad49B7a1B2B1934809609b46240",
+  "abi": [
+    {
+      "inputs": [],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "bountyId",
+          "type": "uint256"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "company",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "rewardPool",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "deadline",
+          "type": "uint256"
+        }
+      ],
+      "name": "BountyCreated",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "bountyId",
+          "type": "uint256"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "winner",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "winnerScore",
+          "type": "uint256"
+        }
+      ],
+      "name": "BountyFinalized",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "bountyId",
+          "type": "uint256"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "company",
+          "type": "address"
+        }
+      ],
+      "name": "CompanyJudged",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "bountyId",
+          "type": "uint256"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "creator",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "contentURI",
+          "type": "string"
+        }
+      ],
+      "name": "CreatorJoined",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "bountyId",
+          "type": "uint256"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "creator",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "RewardClaimed",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "bountyId",
+          "type": "uint256"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "voter",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "creator",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "bool",
+          "name": "isUpvote",
+          "type": "bool"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "stakeAmount",
+          "type": "uint256"
+        }
+      ],
+      "name": "VoteCast",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "bountyId",
+          "type": "uint256"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "voter",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "VoterRewardClaimed",
+      "type": "event"
+    },
+    {
+      "inputs": [],
+      "name": "MIN_VOTE_STAKE",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "bounties",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "id",
+          "type": "uint256"
+        },
+        {
+          "internalType": "address",
+          "name": "company",
+          "type": "address"
+        },
+        {
+          "internalType": "string",
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "description",
+          "type": "string"
+        },
+        {
+          "internalType": "uint256",
+          "name": "deadline",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "rewardPool",
+          "type": "uint256"
+        },
+        {
+          "internalType": "bool",
+          "name": "isFinalized",
+          "type": "bool"
+        },
+        {
+          "internalType": "bool",
+          "name": "companyJudged",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "bountyCount",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "bountyCreators",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "bountyWinner",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "bountyId",
+          "type": "uint256"
+        }
+      ],
+      "name": "claimCreatorReward",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "bountyId",
+          "type": "uint256"
+        }
+      ],
+      "name": "claimVoterReward",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "bountyId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "address[]",
+          "name": "creators",
+          "type": "address[]"
+        },
+        {
+          "internalType": "uint256[]",
+          "name": "scores",
+          "type": "uint256[]"
+        }
+      ],
+      "name": "companyJudge",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "_name",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "_description",
+          "type": "string"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_deadline",
+          "type": "uint256"
+        }
+      ],
+      "name": "createBounty",
+      "outputs": [],
+      "stateMutability": "payable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        },
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "creatorEntries",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "creator",
+          "type": "address"
+        },
+        {
+          "internalType": "string",
+          "name": "contentURI",
+          "type": "string"
+        },
+        {
+          "internalType": "uint256",
+          "name": "upvotes",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "downvotes",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "companyScore",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "totalScore",
+          "type": "uint256"
+        },
+        {
+          "internalType": "bool",
+          "name": "rewardClaimed",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "emergencyWithdraw",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "bountyId",
+          "type": "uint256"
+        }
+      ],
+      "name": "finalizeBounty",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getActiveBounties",
+      "outputs": [
+        {
+          "internalType": "uint256[]",
+          "name": "activeIds",
+          "type": "uint256[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "bountyId",
+          "type": "uint256"
+        }
+      ],
+      "name": "getBounty",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "id",
+          "type": "uint256"
+        },
+        {
+          "internalType": "address",
+          "name": "company",
+          "type": "address"
+        },
+        {
+          "internalType": "string",
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "description",
+          "type": "string"
+        },
+        {
+          "internalType": "uint256",
+          "name": "deadline",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "rewardPool",
+          "type": "uint256"
+        },
+        {
+          "internalType": "bool",
+          "name": "isFinalized",
+          "type": "bool"
+        },
+        {
+          "internalType": "bool",
+          "name": "companyJudged",
+          "type": "bool"
+        },
+        {
+          "internalType": "address",
+          "name": "winner",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "bountyId",
+          "type": "uint256"
+        }
+      ],
+      "name": "getBountyCreators",
+      "outputs": [
+        {
+          "internalType": "address[]",
+          "name": "",
+          "type": "address[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "bountyId",
+          "type": "uint256"
+        }
+      ],
+      "name": "getLeaderboard",
+      "outputs": [
+        {
+          "internalType": "address[]",
+          "name": "creators_",
+          "type": "address[]"
+        },
+        {
+          "internalType": "string[]",
+          "name": "contentURIs",
+          "type": "string[]"
+        },
+        {
+          "internalType": "uint256[]",
+          "name": "upvotes_",
+          "type": "uint256[]"
+        },
+        {
+          "internalType": "uint256[]",
+          "name": "downvotes_",
+          "type": "uint256[]"
+        },
+        {
+          "internalType": "uint256[]",
+          "name": "companyScores",
+          "type": "uint256[]"
+        },
+        {
+          "internalType": "uint256[]",
+          "name": "totalScores",
+          "type": "uint256[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "voter",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "bountyId",
+          "type": "uint256"
+        }
+      ],
+      "name": "getVoteInfo",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        },
+        {
+          "internalType": "address",
+          "name": "votedFor",
+          "type": "address"
+        },
+        {
+          "internalType": "bool",
+          "name": "isUpvote",
+          "type": "bool"
+        },
+        {
+          "internalType": "bool",
+          "name": "exists",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        },
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "hasJoined",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "bountyId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "string",
+          "name": "contentURI",
+          "type": "string"
+        }
+      ],
+      "name": "joinBounty",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "owner",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "totalStakedPerBounty",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "newOwner",
+          "type": "address"
+        }
+      ],
+      "name": "transferOwnership",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "bountyId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "address",
+          "name": "creator",
+          "type": "address"
+        },
+        {
+          "internalType": "bool",
+          "name": "isUpvote",
+          "type": "bool"
+        }
+      ],
+      "name": "vote",
+      "outputs": [],
+      "stateMutability": "payable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "voteStakes",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        },
+        {
+          "internalType": "address",
+          "name": "votedFor",
+          "type": "address"
+        },
+        {
+          "internalType": "bool",
+          "name": "isUpvote",
+          "type": "bool"
+        },
+        {
+          "internalType": "bool",
+          "name": "exists",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "winnerTotalStake",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "stateMutability": "payable",
+      "type": "receive"
+    }
+  ],
+  "transactionHash": "0xaa8689a9616a64a2cf581ace2e4f56f0f9caabefb365f044368af276bb22f587",
+  "receipt": {
+    "to": null,
+    "from": "0xb3E988749F71c2a5C2A226F84d30815d9D8cFC91",
+    "contractAddress": "0x52D036553ca07ad49B7a1B2B1934809609b46240",
+    "transactionIndex": 1,
+    "gasUsed": "2338692",
+    "logsBloom": "0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+    "blockHash": "0xf47d4ec1b09602f8abd5477b8e7702c8c90e8d143941f5df605e181cdeed5df7",
+    "transactionHash": "0xaa8689a9616a64a2cf581ace2e4f56f0f9caabefb365f044368af276bb22f587",
+    "logs": [],
+    "blockNumber": 11449059,
+    "cumulativeGasUsed": "2338692",
+    "status": 1,
+    "byzantium": true
+  },
+  "args": [],
+  "numDeployments": 1,
+  "solcInputHash": "5906e31c09b5209e1d43f7a3d2dcfee1",
+  "metadata": "{\"compiler\":{\"version\":\"0.8.28+commit.7893614a\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"bountyId\",\"type\":\"uint256\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"company\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"string\",\"name\":\"name\",\"type\":\"string\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"rewardPool\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"deadline\",\"type\":\"uint256\"}],\"name\":\"BountyCreated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"bountyId\",\"type\":\"uint256\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"winner\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"winnerScore\",\"type\":\"uint256\"}],\"name\":\"BountyFinalized\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"bountyId\",\"type\":\"uint256\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"company\",\"type\":\"address\"}],\"name\":\"CompanyJudged\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"bountyId\",\"type\":\"uint256\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"creator\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"string\",\"name\":\"contentURI\",\"type\":\"string\"}],\"name\":\"CreatorJoined\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"bountyId\",\"type\":\"uint256\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"creator\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"RewardClaimed\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"bountyId\",\"type\":\"uint256\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"voter\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"creator\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"bool\",\"name\":\"isUpvote\",\"type\":\"bool\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"stakeAmount\",\"type\":\"uint256\"}],\"name\":\"VoteCast\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"bountyId\",\"type\":\"uint256\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"voter\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"VoterRewardClaimed\",\"type\":\"event\"},{\"inputs\":[],\"name\":\"MIN_VOTE_STAKE\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"bounties\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"id\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"company\",\"type\":\"address\"},{\"internalType\":\"string\",\"name\":\"name\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"description\",\"type\":\"string\"},{\"internalType\":\"uint256\",\"name\":\"deadline\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"rewardPool\",\"type\":\"uint256\"},{\"internalType\":\"bool\",\"name\":\"isFinalized\",\"type\":\"bool\"},{\"internalType\":\"bool\",\"name\":\"companyJudged\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"bountyCount\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"bountyCreators\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"bountyWinner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"bountyId\",\"type\":\"uint256\"}],\"name\":\"claimCreatorReward\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"bountyId\",\"type\":\"uint256\"}],\"name\":\"claimVoterReward\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"bountyId\",\"type\":\"uint256\"},{\"internalType\":\"address[]\",\"name\":\"creators\",\"type\":\"address[]\"},{\"internalType\":\"uint256[]\",\"name\":\"scores\",\"type\":\"uint256[]\"}],\"name\":\"companyJudge\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"_name\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"_description\",\"type\":\"string\"},{\"internalType\":\"uint256\",\"name\":\"_deadline\",\"type\":\"uint256\"}],\"name\":\"createBounty\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"creatorEntries\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"creator\",\"type\":\"address\"},{\"internalType\":\"string\",\"name\":\"contentURI\",\"type\":\"string\"},{\"internalType\":\"uint256\",\"name\":\"upvotes\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"downvotes\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"companyScore\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"totalScore\",\"type\":\"uint256\"},{\"internalType\":\"bool\",\"name\":\"rewardClaimed\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"emergencyWithdraw\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"bountyId\",\"type\":\"uint256\"}],\"name\":\"finalizeBounty\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getActiveBounties\",\"outputs\":[{\"internalType\":\"uint256[]\",\"name\":\"activeIds\",\"type\":\"uint256[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"bountyId\",\"type\":\"uint256\"}],\"name\":\"getBounty\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"id\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"company\",\"type\":\"address\"},{\"internalType\":\"string\",\"name\":\"name\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"description\",\"type\":\"string\"},{\"internalType\":\"uint256\",\"name\":\"deadline\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"rewardPool\",\"type\":\"uint256\"},{\"internalType\":\"bool\",\"name\":\"isFinalized\",\"type\":\"bool\"},{\"internalType\":\"bool\",\"name\":\"companyJudged\",\"type\":\"bool\"},{\"internalType\":\"address\",\"name\":\"winner\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"bountyId\",\"type\":\"uint256\"}],\"name\":\"getBountyCreators\",\"outputs\":[{\"internalType\":\"address[]\",\"name\":\"\",\"type\":\"address[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"bountyId\",\"type\":\"uint256\"}],\"name\":\"getLeaderboard\",\"outputs\":[{\"internalType\":\"address[]\",\"name\":\"creators_\",\"type\":\"address[]\"},{\"internalType\":\"string[]\",\"name\":\"contentURIs\",\"type\":\"string[]\"},{\"internalType\":\"uint256[]\",\"name\":\"upvotes_\",\"type\":\"uint256[]\"},{\"internalType\":\"uint256[]\",\"name\":\"downvotes_\",\"type\":\"uint256[]\"},{\"internalType\":\"uint256[]\",\"name\":\"companyScores\",\"type\":\"uint256[]\"},{\"internalType\":\"uint256[]\",\"name\":\"totalScores\",\"type\":\"uint256[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"voter\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"bountyId\",\"type\":\"uint256\"}],\"name\":\"getVoteInfo\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"votedFor\",\"type\":\"address\"},{\"internalType\":\"bool\",\"name\":\"isUpvote\",\"type\":\"bool\"},{\"internalType\":\"bool\",\"name\":\"exists\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"hasJoined\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"bountyId\",\"type\":\"uint256\"},{\"internalType\":\"string\",\"name\":\"contentURI\",\"type\":\"string\"}],\"name\":\"joinBounty\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"totalStakedPerBounty\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"transferOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"bountyId\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"creator\",\"type\":\"address\"},{\"internalType\":\"bool\",\"name\":\"isUpvote\",\"type\":\"bool\"}],\"name\":\"vote\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"voteStakes\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"votedFor\",\"type\":\"address\"},{\"internalType\":\"bool\",\"name\":\"isUpvote\",\"type\":\"bool\"},{\"internalType\":\"bool\",\"name\":\"exists\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"winnerTotalStake\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"stateMutability\":\"payable\",\"type\":\"receive\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{\"claimCreatorReward(uint256)\":{\"params\":{\"bountyId\":\"The finalized bounty\"}},\"claimVoterReward(uint256)\":{\"params\":{\"bountyId\":\"The finalized bounty\"}},\"companyJudge(uint256,address[],uint256[])\":{\"params\":{\"bountyId\":\"The bounty to judge\",\"creators\":\"Array of creator addresses to score\",\"scores\":\"Corresponding scores (0-100) for each creator\"}},\"createBounty(string,string,uint256)\":{\"params\":{\"_deadline\":\"Unix timestamp after which submissions and votes close\",\"_description\":\"Detailed description of what creators should produce\",\"_name\":\"Short title for the bounty\"}},\"emergencyWithdraw(uint256)\":{\"params\":{\"amount\":\"The amount to withdraw\"}},\"finalizeBounty(uint256)\":{\"params\":{\"bountyId\":\"The bounty to finalize\"}},\"getActiveBounties()\":{\"returns\":{\"activeIds\":\"Array of active bounty IDs\"}},\"getBounty(uint256)\":{\"params\":{\"bountyId\":\"The bounty to query\"}},\"getBountyCreators(uint256)\":{\"params\":{\"bountyId\":\"The bounty to query\"},\"returns\":{\"_0\":\"Array of creator addresses\"}},\"getLeaderboard(uint256)\":{\"params\":{\"bountyId\":\"The bounty to query\"},\"returns\":{\"companyScores\":\"Array of company-assigned scores\",\"contentURIs\":\" Array of content URIs\",\"creators_\":\"   Array of creator addresses\",\"downvotes_\":\"  Array of downvote counts\",\"totalScores\":\" Array of weighted final scores (0 until finalized)\",\"upvotes_\":\"    Array of upvote counts\"}},\"getVoteInfo(address,uint256)\":{\"params\":{\"bountyId\":\"The bounty to query\",\"voter\":\"The voter address\"}},\"joinBounty(uint256,string)\":{\"params\":{\"bountyId\":\"The bounty to join\",\"contentURI\":\"IPFS hash or URL pointing to the creator's submission\"}},\"transferOwnership(address)\":{\"params\":{\"newOwner\":\"The new platform owner address\"}},\"vote(uint256,address,bool)\":{\"params\":{\"bountyId\":\"The bounty context\",\"creator\":\"The creator to vote on\",\"isUpvote\":\"true = upvote, false = downvote\"}}},\"stateVariables\":{\"_bountyVoters\":{\"details\":\"bountyId => list of all voter addresses (for winner-stake computation)\"},\"allBountyIds\":{\"details\":\"Track all bounty IDs for enumeration\"},\"bounties\":{\"details\":\"bountyId => Bounty\"},\"bountyCreators\":{\"details\":\"bountyId => ordered list of creator addresses\"},\"bountyWinner\":{\"details\":\"bountyId => winner address (set on finalization)\"},\"creatorEntries\":{\"details\":\"bountyId => creator address => CreatorEntry\"},\"hasJoined\":{\"details\":\"bountyId => creator address => true if already joined\"},\"totalStakedPerBounty\":{\"details\":\"bountyId => total MON staked by all voters\"},\"voteStakes\":{\"details\":\"voter address => bountyId => VoteStake\"},\"winnerTotalStake\":{\"details\":\"bountyId => total stake placed on the winning creator\"}},\"title\":\"BountyPlatform\",\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{\"claimCreatorReward(uint256)\":{\"notice\":\"Winner claims 70% of the reward pool.\"},\"claimVoterReward(uint256)\":{\"notice\":\"Voters claim their stake back. If they voted for the winner, they also         receive a proportional share of 20% of the reward pool.\"},\"companyJudge(uint256,address[],uint256[])\":{\"notice\":\"Company scores each creator 0-100. Can only be called once per bounty.\"},\"createBounty(string,string,uint256)\":{\"notice\":\"Create a new bounty. The sent MON becomes the reward pool.\"},\"emergencyWithdraw(uint256)\":{\"notice\":\"Emergency withdrawal for unclaimed funds after a long period.         Only callable by the platform owner.\"},\"finalizeBounty(uint256)\":{\"notice\":\"Finalize the bounty: compute final scores, determine winner, pay platform fee.         Anyone can call after deadline + company has judged.\"},\"getActiveBounties()\":{\"notice\":\"Get all active (not finalized, deadline not passed) bounty IDs.\"},\"getBounty(uint256)\":{\"notice\":\"Get full details of a specific bounty.\"},\"getBountyCreators(uint256)\":{\"notice\":\"Get the list of creator addresses for a bounty.\"},\"getLeaderboard(uint256)\":{\"notice\":\"Get the full leaderboard for a bounty.\"},\"getVoteInfo(address,uint256)\":{\"notice\":\"Get a voter's stake info for a specific bounty.\"},\"joinBounty(uint256,string)\":{\"notice\":\"Join a bounty by submitting content.\"},\"transferOwnership(address)\":{\"notice\":\"Transfer platform ownership.\"},\"vote(uint256,address,bool)\":{\"notice\":\"Vote on a creator's submission by staking MON.         Each wallet gets exactly one vote per bounty (up or down on one creator).\"}},\"notice\":\"A Social-Fi bounty platform for Monad where companies post bounties,         creators submit content, and the community votes with staked MON.         Scoring: 60% company judge + 40% community votes.         Reward split: 70% winner, 20% winning voters, 10% platform.\",\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/BountyPlatform.sol\":\"BountyPlatform\"},\"evmVersion\":\"prague\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\",\"useLiteralContent\":true},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[],\"viaIR\":true},\"sources\":{\"contracts/BountyPlatform.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\r\\npragma solidity ^0.8.28;\\r\\n\\r\\n/**\\r\\n * @title BountyPlatform\\r\\n * @notice A Social-Fi bounty platform for Monad where companies post bounties,\\r\\n *         creators submit content, and the community votes with staked MON.\\r\\n *         Scoring: 60% company judge + 40% community votes.\\r\\n *         Reward split: 70% winner, 20% winning voters, 10% platform.\\r\\n */\\r\\ncontract BountyPlatform {\\r\\n    // =========================================================================\\r\\n    //                            REENTRANCY GUARD\\r\\n    // =========================================================================\\r\\n\\r\\n    uint256 private constant _NOT_ENTERED = 1;\\r\\n    uint256 private constant _ENTERED = 2;\\r\\n    uint256 private _status = _NOT_ENTERED;\\r\\n\\r\\n    modifier nonReentrant() {\\r\\n        require(_status != _ENTERED, \\\"ReentrancyGuard: reentrant call\\\");\\r\\n        _status = _ENTERED;\\r\\n        _;\\r\\n        _status = _NOT_ENTERED;\\r\\n    }\\r\\n\\r\\n    // =========================================================================\\r\\n    //                              DATA STRUCTURES\\r\\n    // =========================================================================\\r\\n\\r\\n    struct Bounty {\\r\\n        uint256 id;\\r\\n        address company;\\r\\n        string name;\\r\\n        string description;\\r\\n        uint256 deadline;\\r\\n        uint256 rewardPool;\\r\\n        bool isFinalized;\\r\\n        bool companyJudged;\\r\\n    }\\r\\n\\r\\n    struct CreatorEntry {\\r\\n        address creator;\\r\\n        string contentURI;       // IPFS hash or URL to submitted content\\r\\n        uint256 upvotes;\\r\\n        uint256 downvotes;\\r\\n        uint256 companyScore;    // 0-100, assigned by the bounty company\\r\\n        uint256 totalScore;      // Weighted final score (set on finalization)\\r\\n        bool rewardClaimed;\\r\\n    }\\r\\n\\r\\n    struct VoteStake {\\r\\n        uint256 amount;          // MON staked with this vote\\r\\n        address votedFor;        // Which creator received the vote\\r\\n        bool isUpvote;           // Was it an upvote or downvote\\r\\n        bool exists;             // Whether this voter has voted in this bounty\\r\\n    }\\r\\n\\r\\n    // =========================================================================\\r\\n    //                                 STATE\\r\\n    // =========================================================================\\r\\n\\r\\n    address public owner;                          // Platform owner (receives 10%)\\r\\n    uint256 public bountyCount;                    // Auto-incrementing bounty ID\\r\\n    uint256 public constant MIN_VOTE_STAKE = 0.01 ether; // Minimum stake per vote\\r\\n\\r\\n    /// @dev bountyId => Bounty\\r\\n    mapping(uint256 => Bounty) public bounties;\\r\\n\\r\\n    /// @dev bountyId => creator address => CreatorEntry\\r\\n    mapping(uint256 => mapping(address => CreatorEntry)) public creatorEntries;\\r\\n\\r\\n    /// @dev bountyId => ordered list of creator addresses\\r\\n    mapping(uint256 => address[]) public bountyCreators;\\r\\n\\r\\n    /// @dev bountyId => creator address => true if already joined\\r\\n    mapping(uint256 => mapping(address => bool)) public hasJoined;\\r\\n\\r\\n    /// @dev voter address => bountyId => VoteStake\\r\\n    mapping(address => mapping(uint256 => VoteStake)) public voteStakes;\\r\\n\\r\\n    /// @dev bountyId => total MON staked by all voters\\r\\n    mapping(uint256 => uint256) public totalStakedPerBounty;\\r\\n\\r\\n    /// @dev bountyId => winner address (set on finalization)\\r\\n    mapping(uint256 => address) public bountyWinner;\\r\\n\\r\\n    /// @dev bountyId => total stake placed on the winning creator\\r\\n    mapping(uint256 => uint256) public winnerTotalStake;\\r\\n\\r\\n    /// @dev bountyId => list of all voter addresses (for winner-stake computation)\\r\\n    mapping(uint256 => address[]) internal _bountyVoters;\\r\\n\\r\\n    /// @dev Track all bounty IDs for enumeration\\r\\n    uint256[] private allBountyIds;\\r\\n\\r\\n    // =========================================================================\\r\\n    //                                 EVENTS\\r\\n    // =========================================================================\\r\\n\\r\\n    event BountyCreated(\\r\\n        uint256 indexed bountyId,\\r\\n        address indexed company,\\r\\n        string name,\\r\\n        uint256 rewardPool,\\r\\n        uint256 deadline\\r\\n    );\\r\\n\\r\\n    event CreatorJoined(\\r\\n        uint256 indexed bountyId,\\r\\n        address indexed creator,\\r\\n        string contentURI\\r\\n    );\\r\\n\\r\\n    event VoteCast(\\r\\n        uint256 indexed bountyId,\\r\\n        address indexed voter,\\r\\n        address indexed creator,\\r\\n        bool isUpvote,\\r\\n        uint256 stakeAmount\\r\\n    );\\r\\n\\r\\n    event CompanyJudged(\\r\\n        uint256 indexed bountyId,\\r\\n        address indexed company\\r\\n    );\\r\\n\\r\\n    event BountyFinalized(\\r\\n        uint256 indexed bountyId,\\r\\n        address indexed winner,\\r\\n        uint256 winnerScore\\r\\n    );\\r\\n\\r\\n    event RewardClaimed(\\r\\n        uint256 indexed bountyId,\\r\\n        address indexed creator,\\r\\n        uint256 amount\\r\\n    );\\r\\n\\r\\n    event VoterRewardClaimed(\\r\\n        uint256 indexed bountyId,\\r\\n        address indexed voter,\\r\\n        uint256 amount\\r\\n    );\\r\\n\\r\\n    // =========================================================================\\r\\n    //                               MODIFIERS\\r\\n    // =========================================================================\\r\\n\\r\\n    modifier onlyOwner() {\\r\\n        require(msg.sender == owner, \\\"Only platform owner\\\");\\r\\n        _;\\r\\n    }\\r\\n\\r\\n    modifier onlyCompany(uint256 bountyId) {\\r\\n        require(msg.sender == bounties[bountyId].company, \\\"Only bounty company\\\");\\r\\n        _;\\r\\n    }\\r\\n\\r\\n    modifier beforeDeadline(uint256 bountyId) {\\r\\n        require(block.timestamp < bounties[bountyId].deadline, \\\"Deadline has passed\\\");\\r\\n        _;\\r\\n    }\\r\\n\\r\\n    modifier afterDeadline(uint256 bountyId) {\\r\\n        require(block.timestamp >= bounties[bountyId].deadline, \\\"Deadline not reached\\\");\\r\\n        _;\\r\\n    }\\r\\n\\r\\n    modifier notFinalized(uint256 bountyId) {\\r\\n        require(!bounties[bountyId].isFinalized, \\\"Bounty already finalized\\\");\\r\\n        _;\\r\\n    }\\r\\n\\r\\n    // =========================================================================\\r\\n    //                              CONSTRUCTOR\\r\\n    // =========================================================================\\r\\n\\r\\n    constructor() {\\r\\n        owner = msg.sender;\\r\\n    }\\r\\n\\r\\n    // =========================================================================\\r\\n    //                           CORE FUNCTIONS\\r\\n    // =========================================================================\\r\\n\\r\\n    /**\\r\\n     * @notice Create a new bounty. The sent MON becomes the reward pool.\\r\\n     * @param _name        Short title for the bounty\\r\\n     * @param _description Detailed description of what creators should produce\\r\\n     * @param _deadline    Unix timestamp after which submissions and votes close\\r\\n     */\\r\\n    function createBounty(\\r\\n        string calldata _name,\\r\\n        string calldata _description,\\r\\n        uint256 _deadline\\r\\n    ) external payable {\\r\\n        require(msg.value > 0, \\\"Reward pool must be > 0\\\");\\r\\n        require(_deadline > block.timestamp, \\\"Deadline must be in the future\\\");\\r\\n        require(bytes(_name).length > 0, \\\"Name cannot be empty\\\");\\r\\n\\r\\n        uint256 bountyId = bountyCount;\\r\\n        bountyCount++;\\r\\n\\r\\n        bounties[bountyId] = Bounty({\\r\\n            id: bountyId,\\r\\n            company: msg.sender,\\r\\n            name: _name,\\r\\n            description: _description,\\r\\n            deadline: _deadline,\\r\\n            rewardPool: msg.value,\\r\\n            isFinalized: false,\\r\\n            companyJudged: false\\r\\n        });\\r\\n\\r\\n        allBountyIds.push(bountyId);\\r\\n\\r\\n        emit BountyCreated(bountyId, msg.sender, _name, msg.value, _deadline);\\r\\n    }\\r\\n\\r\\n    /**\\r\\n     * @notice Join a bounty by submitting content.\\r\\n     * @param bountyId   The bounty to join\\r\\n     * @param contentURI IPFS hash or URL pointing to the creator's submission\\r\\n     */\\r\\n    function joinBounty(\\r\\n        uint256 bountyId,\\r\\n        string calldata contentURI\\r\\n    ) external beforeDeadline(bountyId) notFinalized(bountyId) {\\r\\n        require(bountyId < bountyCount, \\\"Bounty does not exist\\\");\\r\\n        require(!hasJoined[bountyId][msg.sender], \\\"Already joined this bounty\\\");\\r\\n        require(bytes(contentURI).length > 0, \\\"Content URI cannot be empty\\\");\\r\\n        require(msg.sender != bounties[bountyId].company, \\\"Company cannot join own bounty\\\");\\r\\n\\r\\n        hasJoined[bountyId][msg.sender] = true;\\r\\n\\r\\n        creatorEntries[bountyId][msg.sender] = CreatorEntry({\\r\\n            creator: msg.sender,\\r\\n            contentURI: contentURI,\\r\\n            upvotes: 0,\\r\\n            downvotes: 0,\\r\\n            companyScore: 0,\\r\\n            totalScore: 0,\\r\\n            rewardClaimed: false\\r\\n        });\\r\\n\\r\\n        bountyCreators[bountyId].push(msg.sender);\\r\\n\\r\\n        emit CreatorJoined(bountyId, msg.sender, contentURI);\\r\\n    }\\r\\n\\r\\n    /**\\r\\n     * @notice Vote on a creator's submission by staking MON.\\r\\n     *         Each wallet gets exactly one vote per bounty (up or down on one creator).\\r\\n     * @param bountyId The bounty context\\r\\n     * @param creator  The creator to vote on\\r\\n     * @param isUpvote true = upvote, false = downvote\\r\\n     */\\r\\n    function vote(\\r\\n        uint256 bountyId,\\r\\n        address creator,\\r\\n        bool isUpvote\\r\\n    ) external payable beforeDeadline(bountyId) notFinalized(bountyId) {\\r\\n        require(bountyId < bountyCount, \\\"Bounty does not exist\\\");\\r\\n        require(msg.value >= MIN_VOTE_STAKE, \\\"Stake below minimum (0.01 MON)\\\");\\r\\n        require(hasJoined[bountyId][creator], \\\"Creator not in this bounty\\\");\\r\\n        require(!voteStakes[msg.sender][bountyId].exists, \\\"Already voted in this bounty\\\");\\r\\n        require(msg.sender != creator, \\\"Cannot vote for yourself\\\");\\r\\n\\r\\n        // Record the vote stake\\r\\n        voteStakes[msg.sender][bountyId] = VoteStake({\\r\\n            amount: msg.value,\\r\\n            votedFor: creator,\\r\\n            isUpvote: isUpvote,\\r\\n            exists: true\\r\\n        });\\r\\n\\r\\n        totalStakedPerBounty[bountyId] += msg.value;\\r\\n\\r\\n        // Track voter address for winner-stake computation at finalization\\r\\n        _bountyVoters[bountyId].push(msg.sender);\\r\\n\\r\\n        // Update creator vote tallies\\r\\n        if (isUpvote) {\\r\\n            creatorEntries[bountyId][creator].upvotes++;\\r\\n        } else {\\r\\n            creatorEntries[bountyId][creator].downvotes++;\\r\\n        }\\r\\n\\r\\n        emit VoteCast(bountyId, msg.sender, creator, isUpvote, msg.value);\\r\\n    }\\r\\n\\r\\n    /**\\r\\n     * @notice Company scores each creator 0-100. Can only be called once per bounty.\\r\\n     * @param bountyId The bounty to judge\\r\\n     * @param creators Array of creator addresses to score\\r\\n     * @param scores   Corresponding scores (0-100) for each creator\\r\\n     */\\r\\n    function companyJudge(\\r\\n        uint256 bountyId,\\r\\n        address[] calldata creators,\\r\\n        uint256[] calldata scores\\r\\n    ) external onlyCompany(bountyId) notFinalized(bountyId) {\\r\\n        require(bountyId < bountyCount, \\\"Bounty does not exist\\\");\\r\\n        require(!bounties[bountyId].companyJudged, \\\"Already judged\\\");\\r\\n        require(creators.length == scores.length, \\\"Arrays length mismatch\\\");\\r\\n        require(creators.length > 0, \\\"Must score at least one creator\\\");\\r\\n\\r\\n        for (uint256 i = 0; i < creators.length; i++) {\\r\\n            require(hasJoined[bountyId][creators[i]], \\\"Creator not in this bounty\\\");\\r\\n            require(scores[i] <= 100, \\\"Score must be 0-100\\\");\\r\\n            creatorEntries[bountyId][creators[i]].companyScore = scores[i];\\r\\n        }\\r\\n\\r\\n        bounties[bountyId].companyJudged = true;\\r\\n\\r\\n        emit CompanyJudged(bountyId, msg.sender);\\r\\n    }\\r\\n\\r\\n    /**\\r\\n     * @notice Finalize the bounty: compute final scores, determine winner, pay platform fee.\\r\\n     *         Anyone can call after deadline + company has judged.\\r\\n     * @param bountyId The bounty to finalize\\r\\n     */\\r\\n    function finalizeBounty(\\r\\n        uint256 bountyId\\r\\n    ) external afterDeadline(bountyId) notFinalized(bountyId) nonReentrant {\\r\\n        require(bountyId < bountyCount, \\\"Bounty does not exist\\\");\\r\\n        require(bounties[bountyId].companyJudged, \\\"Company has not judged yet\\\");\\r\\n\\r\\n        address[] storage creators = bountyCreators[bountyId];\\r\\n        require(creators.length > 0, \\\"No creators in this bounty\\\");\\r\\n\\r\\n        address winner = address(0);\\r\\n        uint256 highestScore = 0;\\r\\n\\r\\n        for (uint256 i = 0; i < creators.length; i++) {\\r\\n            CreatorEntry storage entry = creatorEntries[bountyId][creators[i]];\\r\\n\\r\\n            // Calculate community score: upvotes as percentage of total votes\\r\\n            uint256 communityScore;\\r\\n            uint256 totalVotes = entry.upvotes + entry.downvotes;\\r\\n            if (totalVotes == 0) {\\r\\n                communityScore = 0; // No votes => 0 community score\\r\\n            } else {\\r\\n                communityScore = (entry.upvotes * 100) / totalVotes;\\r\\n            }\\r\\n\\r\\n            // Weighted total: 60% company + 40% community\\r\\n            uint256 finalScore = (entry.companyScore * 60) / 100\\r\\n                               + (communityScore * 40) / 100;\\r\\n\\r\\n            entry.totalScore = finalScore;\\r\\n\\r\\n            if (finalScore > highestScore) {\\r\\n                highestScore = finalScore;\\r\\n                winner = creators[i];\\r\\n            }\\r\\n        }\\r\\n\\r\\n        require(winner != address(0), \\\"No valid winner\\\");\\r\\n\\r\\n        bounties[bountyId].isFinalized = true;\\r\\n        bountyWinner[bountyId] = winner;\\r\\n\\r\\n        // Winner total stake is computed lazily on first voter claim to save gas here.\\r\\n        // _computeWinnerTotalStake() is called in claimVoterReward if not yet set.\\r\\n\\r\\n        // Transfer 10% platform fee to contract owner\\r\\n        uint256 platformFee = (bounties[bountyId].rewardPool * 10) / 100;\\r\\n        if (platformFee > 0) {\\r\\n            (bool success, ) = owner.call{value: platformFee}(\\\"\\\");\\r\\n            require(success, \\\"Platform fee transfer failed\\\");\\r\\n        }\\r\\n\\r\\n        emit BountyFinalized(bountyId, winner, highestScore);\\r\\n    }\\r\\n\\r\\n    /**\\r\\n     * @notice Winner claims 70% of the reward pool.\\r\\n     * @param bountyId The finalized bounty\\r\\n     */\\r\\n    function claimCreatorReward(uint256 bountyId) external nonReentrant {\\r\\n        require(bounties[bountyId].isFinalized, \\\"Bounty not finalized\\\");\\r\\n        require(bountyWinner[bountyId] == msg.sender, \\\"Only the winner can claim\\\");\\r\\n\\r\\n        CreatorEntry storage entry = creatorEntries[bountyId][msg.sender];\\r\\n        require(!entry.rewardClaimed, \\\"Reward already claimed\\\");\\r\\n\\r\\n        entry.rewardClaimed = true;\\r\\n\\r\\n        uint256 creatorReward = (bounties[bountyId].rewardPool * 70) / 100;\\r\\n\\r\\n        (bool success, ) = msg.sender.call{value: creatorReward}(\\\"\\\");\\r\\n        require(success, \\\"Creator reward transfer failed\\\");\\r\\n\\r\\n        emit RewardClaimed(bountyId, msg.sender, creatorReward);\\r\\n    }\\r\\n\\r\\n    /**\\r\\n     * @notice Voters claim their stake back. If they voted for the winner, they also\\r\\n     *         receive a proportional share of 20% of the reward pool.\\r\\n     * @param bountyId The finalized bounty\\r\\n     */\\r\\n    function claimVoterReward(uint256 bountyId) external nonReentrant {\\r\\n        require(bounties[bountyId].isFinalized, \\\"Bounty not finalized\\\");\\r\\n\\r\\n        VoteStake storage stake = voteStakes[msg.sender][bountyId];\\r\\n        require(stake.exists, \\\"No vote stake found\\\");\\r\\n        require(stake.amount > 0, \\\"Already claimed\\\");\\r\\n\\r\\n        uint256 stakeAmount = stake.amount;\\r\\n        address votedFor = stake.votedFor;\\r\\n\\r\\n        // Zero out stake before transfer to prevent reentrancy\\r\\n        stake.amount = 0;\\r\\n\\r\\n        uint256 payout = stakeAmount; // At minimum, voters get their stake back\\r\\n\\r\\n        if (votedFor == bountyWinner[bountyId] && stake.isUpvote) {\\r\\n            // Voter backed the winner \\u2014 they share 20% of the reward pool\\r\\n            // Proportional to their stake among all winner-backing stakes\\r\\n            uint256 voterRewardPool = (bounties[bountyId].rewardPool * 20) / 100;\\r\\n\\r\\n            // We need the total stake on the winner. Compute it if not yet set.\\r\\n            if (winnerTotalStake[bountyId] == 0) {\\r\\n                _computeWinnerTotalStake(bountyId);\\r\\n            }\\r\\n\\r\\n            if (winnerTotalStake[bountyId] > 0) {\\r\\n                uint256 voterShare = (voterRewardPool * stakeAmount) / winnerTotalStake[bountyId];\\r\\n                payout += voterShare;\\r\\n            }\\r\\n        }\\r\\n\\r\\n        (bool success, ) = msg.sender.call{value: payout}(\\\"\\\");\\r\\n        require(success, \\\"Voter reward transfer failed\\\");\\r\\n\\r\\n        emit VoterRewardClaimed(bountyId, msg.sender, payout);\\r\\n    }\\r\\n\\r\\n    // =========================================================================\\r\\n    //                            VIEW FUNCTIONS\\r\\n    // =========================================================================\\r\\n\\r\\n    /**\\r\\n     * @notice Get the full leaderboard for a bounty.\\r\\n     * @param bountyId The bounty to query\\r\\n     * @return creators_    Array of creator addresses\\r\\n     * @return contentURIs  Array of content URIs\\r\\n     * @return upvotes_     Array of upvote counts\\r\\n     * @return downvotes_   Array of downvote counts\\r\\n     * @return companyScores Array of company-assigned scores\\r\\n     * @return totalScores  Array of weighted final scores (0 until finalized)\\r\\n     */\\r\\n    function getLeaderboard(uint256 bountyId)\\r\\n        external\\r\\n        view\\r\\n        returns (\\r\\n            address[] memory creators_,\\r\\n            string[] memory contentURIs,\\r\\n            uint256[] memory upvotes_,\\r\\n            uint256[] memory downvotes_,\\r\\n            uint256[] memory companyScores,\\r\\n            uint256[] memory totalScores\\r\\n        )\\r\\n    {\\r\\n        address[] storage _creators = bountyCreators[bountyId];\\r\\n        uint256 len = _creators.length;\\r\\n\\r\\n        creators_ = new address[](len);\\r\\n        contentURIs = new string[](len);\\r\\n        upvotes_ = new uint256[](len);\\r\\n        downvotes_ = new uint256[](len);\\r\\n        companyScores = new uint256[](len);\\r\\n        totalScores = new uint256[](len);\\r\\n\\r\\n        for (uint256 i = 0; i < len; i++) {\\r\\n            CreatorEntry storage entry = creatorEntries[bountyId][_creators[i]];\\r\\n            creators_[i] = entry.creator;\\r\\n            contentURIs[i] = entry.contentURI;\\r\\n            upvotes_[i] = entry.upvotes;\\r\\n            downvotes_[i] = entry.downvotes;\\r\\n            companyScores[i] = entry.companyScore;\\r\\n            totalScores[i] = entry.totalScore;\\r\\n        }\\r\\n    }\\r\\n\\r\\n    /**\\r\\n     * @notice Get the list of creator addresses for a bounty.\\r\\n     * @param bountyId The bounty to query\\r\\n     * @return Array of creator addresses\\r\\n     */\\r\\n    function getBountyCreators(uint256 bountyId)\\r\\n        external\\r\\n        view\\r\\n        returns (address[] memory)\\r\\n    {\\r\\n        return bountyCreators[bountyId];\\r\\n    }\\r\\n\\r\\n    /**\\r\\n     * @notice Get all active (not finalized, deadline not passed) bounty IDs.\\r\\n     * @return activeIds Array of active bounty IDs\\r\\n     */\\r\\n    function getActiveBounties()\\r\\n        external\\r\\n        view\\r\\n        returns (uint256[] memory activeIds)\\r\\n    {\\r\\n        // First pass: count active bounties\\r\\n        uint256 activeCount = 0;\\r\\n        for (uint256 i = 0; i < allBountyIds.length; i++) {\\r\\n            uint256 bid = allBountyIds[i];\\r\\n            if (!bounties[bid].isFinalized && block.timestamp < bounties[bid].deadline) {\\r\\n                activeCount++;\\r\\n            }\\r\\n        }\\r\\n\\r\\n        // Second pass: populate array\\r\\n        activeIds = new uint256[](activeCount);\\r\\n        uint256 idx = 0;\\r\\n        for (uint256 i = 0; i < allBountyIds.length; i++) {\\r\\n            uint256 bid = allBountyIds[i];\\r\\n            if (!bounties[bid].isFinalized && block.timestamp < bounties[bid].deadline) {\\r\\n                activeIds[idx] = bid;\\r\\n                idx++;\\r\\n            }\\r\\n        }\\r\\n    }\\r\\n\\r\\n    /**\\r\\n     * @notice Get full details of a specific bounty.\\r\\n     * @param bountyId The bounty to query\\r\\n     */\\r\\n    function getBounty(uint256 bountyId)\\r\\n        external\\r\\n        view\\r\\n        returns (\\r\\n            uint256 id,\\r\\n            address company,\\r\\n            string memory name,\\r\\n            string memory description,\\r\\n            uint256 deadline,\\r\\n            uint256 rewardPool,\\r\\n            bool isFinalized,\\r\\n            bool companyJudged,\\r\\n            address winner\\r\\n        )\\r\\n    {\\r\\n        Bounty storage b = bounties[bountyId];\\r\\n        return (\\r\\n            b.id,\\r\\n            b.company,\\r\\n            b.name,\\r\\n            b.description,\\r\\n            b.deadline,\\r\\n            b.rewardPool,\\r\\n            b.isFinalized,\\r\\n            b.companyJudged,\\r\\n            bountyWinner[bountyId]\\r\\n        );\\r\\n    }\\r\\n\\r\\n    /**\\r\\n     * @notice Get a voter's stake info for a specific bounty.\\r\\n     * @param voter   The voter address\\r\\n     * @param bountyId The bounty to query\\r\\n     */\\r\\n    function getVoteInfo(address voter, uint256 bountyId)\\r\\n        external\\r\\n        view\\r\\n        returns (\\r\\n            uint256 amount,\\r\\n            address votedFor,\\r\\n            bool isUpvote,\\r\\n            bool exists\\r\\n        )\\r\\n    {\\r\\n        VoteStake storage vs = voteStakes[voter][bountyId];\\r\\n        return (vs.amount, vs.votedFor, vs.isUpvote, vs.exists);\\r\\n    }\\r\\n\\r\\n    // =========================================================================\\r\\n    //                          INTERNAL HELPERS\\r\\n    // =========================================================================\\r\\n\\r\\n    /**\\r\\n     * @dev Compute the total stake placed by upvoters on the winning creator.\\r\\n     *      This is called lazily on the first voter claim to save gas at finalization.\\r\\n     *      NOTE: This iterates all creators' upvoters \\u2014 in a production system with\\r\\n     *      many voters you would want an off-chain indexer or accumulate during voting.\\r\\n     *      For hackathon scope with bounded participants, this is acceptable.\\r\\n     */\\r\\n    function _computeWinnerTotalStake(uint256 bountyId) internal {\\r\\n        address[] storage voters = _bountyVoters[bountyId];\\r\\n        address winner = bountyWinner[bountyId];\\r\\n        uint256 total = 0;\\r\\n\\r\\n        for (uint256 i = 0; i < voters.length; i++) {\\r\\n            VoteStake storage vs = voteStakes[voters[i]][bountyId];\\r\\n            if (vs.votedFor == winner && vs.isUpvote) {\\r\\n                total += vs.amount;\\r\\n            }\\r\\n        }\\r\\n\\r\\n        winnerTotalStake[bountyId] = total;\\r\\n    }\\r\\n\\r\\n    // =========================================================================\\r\\n    //                     TRANSFER OWNERSHIP (PLATFORM)\\r\\n    // =========================================================================\\r\\n\\r\\n    /**\\r\\n     * @notice Transfer platform ownership.\\r\\n     * @param newOwner The new platform owner address\\r\\n     */\\r\\n    function transferOwnership(address newOwner) external onlyOwner {\\r\\n        require(newOwner != address(0), \\\"New owner is zero address\\\");\\r\\n        owner = newOwner;\\r\\n    }\\r\\n\\r\\n    /**\\r\\n     * @notice Emergency withdrawal for unclaimed funds after a long period.\\r\\n     *         Only callable by the platform owner.\\r\\n     * @param amount The amount to withdraw\\r\\n     */\\r\\n    function emergencyWithdraw(uint256 amount) external onlyOwner nonReentrant {\\r\\n        require(amount <= address(this).balance, \\\"Insufficient balance\\\");\\r\\n        (bool success, ) = owner.call{value: amount}(\\\"\\\");\\r\\n        require(success, \\\"Withdrawal failed\\\");\\r\\n    }\\r\\n\\r\\n    /// @notice Allow contract to receive MON directly\\r\\n    receive() external payable {}\\r\\n}\\r\\n\",\"keccak256\":\"0x1dfb61cdd26b3c81d890e04143b7a496832a6357c17c3ae061da8dcb076b7b96\",\"license\":\"MIT\"}},\"version\":1}",
+  "bytecode": "0x60808060405234602b5760015f81905580546001600160a01b031916331790556127ed90816100308239f35b5f80fdfe608080604052600436101561001c575b50361561001a575f80fd5b005b5f3560e01c908163191634c314611e40575080631e75a1dc1461087f5780632bfa7d601461197a5780633430754a146118d15780633afb7959146118505780633e362c96146118335780635312ea8e1461175d5780636819471914611714578063735d1654146116c45780637ccbcccb146112bf578063800be0ce1461128d5780638da5cb5b1461126557806395beeae814611244578063a30f0e2c1461121a578063a34b46fe14610fdc578063b4e5126914610ebf578063ba2f036214610cfa578063c893b82f146109e6578063da321ff5146109bc578063dc2f874414610906578063dc4cfee61461087f578063e2cdd42a1461057d578063ee8c4bbf146104ac578063f2fde38b146104165763f4aeb0dc1461013b575f61000f565b34610412576060366003190112610412576004356024356001600160401b0381116104125761016e9036906004016123fd565b906044356001600160401b0381116104125761018e9036906004016123fd565b5f8581526003602052604090206001015491939092916001600160a01b031633036103d757845f5260036020526101cf60ff600660405f200154161561242d565b6101dc60025486106124c5565b845f52600360205260ff600660405f20015460081c166103a15782810361036357801561031e575f5b8181106102515785805f526003602052600660405f200161010061ff001982541617905533907f62a59899ec1522f6263db24df3c2b0fe1cc0d79b83b84fe91ff87eb8e8f33d945f80a3005b855f52600660205260405f2061027061026b838587612793565b6127a3565b60018060a01b03165f5260205261028d60ff60405f205416612747565b606461029a828688612793565b35116102e357806102ae6001928688612793565b35875f52600460205260405f206102c961026b848789612793565b848060a01b03165f52602052600460405f20015501610205565b60405162461bcd60e51b8152602060048201526013602482015272053636f7265206d75737420626520302d31303606c1b6044820152606490fd5b60405162461bcd60e51b815260206004820152601f60248201527f4d7573742073636f7265206174206c65617374206f6e652063726561746f72006044820152606490fd5b60405162461bcd60e51b8152602060048201526016602482015275082e4e4c2f2e640d8cadccee8d040dad2e6dac2e8c6d60531b6044820152606490fd5b60405162461bcd60e51b815260206004820152600e60248201526d105b1c9958591e481a9d5919d95960921b6044820152606490fd5b60405162461bcd60e51b81526020600482015260136024820152724f6e6c7920626f756e747920636f6d70616e7960681b6044820152606490fd5b5f80fd5b346104125760203660031901126104125761042f6121d7565b60015490610447336001600160a01b038416146125e2565b6001600160a01b0316908115610467576001600160a01b03191617600155005b60405162461bcd60e51b815260206004820152601960248201527f4e6577206f776e6572206973207a65726f2061646472657373000000000000006044820152606490fd5b3461041257602036600319011261041257600435805f52600360205260405f209081549060018060a01b036001840154169260ff60048201549260058301546006840154915f52600960205261055360018060a01b0360405f20541694610545610524600361051d60028501612289565b9301612289565b916040519a8b9a8b5260208b015261012060408b01526101208a0190612329565b9088820360608a0152612329565b94608087015260a0860152818116151560c086015260081c16151560e08401526101008301520390f35b6060366003190112610412576004356105946121ed565b604435918215159182840361041257815f5260036020526105bd600460405f2001544210612624565b815f5260036020526105d960ff600660405f200154161561242d565b6105e660025483106124c5565b662386f26fc10000341061083a57815f52600660205260405f2060018060a01b0382165f5260205261061e60ff60405f205416612747565b335f52600760205260405f20825f5260205260ff600160405f20015460a81c166107f5576001600160a01b0316923384146107b057604051608081018181106001600160401b0382111761079c576040908152348083526020808401888152848401888152600160608701818152335f908152600786528781208b82528652878120985189559351979091018054925191516001600160b01b03199093166001600160a01b03989098169790971790151560a01b60ff60a01b161790151560a81b60ff60a81b1617909455600890529120805490916106fc91612509565b9055815f52600b6020526107133360405f20612666565b1561077257805f52600460205260405f20835f52602052600260405f200161073b815461257e565b90555b6040519182523460208301527fe67bcbb082983775f52d474de7e0b293ee14bebef1dadab2923061af3972cad060403393a4005b805f52600460205260405f20835f52602052600360405f2001610795815461257e565b905561073e565b634e487b7160e01b5f52604160045260245ffd5b60405162461bcd60e51b815260206004820152601860248201527f43616e6e6f7420766f746520666f7220796f757273656c6600000000000000006044820152606490fd5b60405162461bcd60e51b815260206004820152601c60248201527f416c726561647920766f74656420696e207468697320626f756e7479000000006044820152606490fd5b60405162461bcd60e51b815260206004820152601e60248201527f5374616b652062656c6f77206d696e696d756d2028302e3031204d4f4e2900006044820152606490fd5b34610412576040366003190112610412576001600160a01b036108a06121d7565b165f9081526007602090815260408083206024358452825291829020805460019091015483519182526001600160a01b0381169282019290925260ff60a083901c811615159382019390935260a89190911c9091161515606082015280608081015b0390f35b34610412576020366003190112610412576004355f908152600360205260409020805460018201546001600160a01b03169160ff61094660028301612289565b61095260038401612289565b9261099860048201549461098a6006600585015494015494604051998a998a5260208a015261010060408a0152610100890190612329565b908782036060890152612329565b93608086015260a0850152818116151560c085015260081c16151560e08301520390f35b34610412576020366003190112610412576004355f52600a602052602060405f2054604051908152f35b3461041257602036600319011261041257600435610a0860025f541415612479565b60025f55805f526003602052610a2760ff600660405f20015416612704565b335f52600760205260405f20815f5260205260405f209060018201549160ff8360a81c1615610cbf578054908115610c88575f9081905582815260096020526040902054909283916001600160a01b038083169116149081610c7a575b50610b18575b505f80808085335af1610a9b61254f565b5015610ad3576040519182527f22260a4a3f904a70c4b83f22f2b995fcd9c0b70ea78a18dc3b76fbd9426fc5b060203393a360015f55005b60405162461bcd60e51b815260206004820152601c60248201527f566f74657220726577617264207472616e73666572206661696c6564000000006044820152606490fd5b815f526003602052600560405f200154601481029080820460141490151715610ba8576064900490825f52600a60205260405f205415610bbc575b825f52600a60205260405f2054610b6b575b50610a8a565b9091925080820291808304821490151715610ba857610b9a610ba092845f52600a60205260405f205490612516565b90612509565b908280610b65565b634e487b7160e01b5f52601160045260245ffd5b5f838152600b6020908152604080832060099092528220548154916001600160a01b0390911690835b838110610c025750505050835f52600a60205260405f2055610b53565b610c0c81836123b5565b60018060a01b0391549060031b1c165f52600760205260405f20885f5260205260405f2060018101548460018060a01b038216149081610c6c575b50610c56575b50600101610be5565b60019195610c65915490612509565b9490610c4d565b60ff915060a01c168b610c47565b60ff915060a01c1684610a84565b60405162461bcd60e51b815260206004820152600f60248201526e105b1c9958591e4818db185a5b5959608a1b6044820152606490fd5b60405162461bcd60e51b8152602060048201526013602482015272139bc81d9bdd19481cdd185ad948199bdd5b99606a1b6044820152606490fd5b3461041257602036600319011261041257600435610d1c60025f541415612479565b60025f55805f526003602052610d3b60ff600660405f20015416612704565b5f818152600960205260409020546001600160a01b03163303610e7a575f8181526004602090815260408083203384529091529020600601805460ff8116610e3c5760019060ff1916179055805f526003602052600560405f200154604681029080820460461490151715610ba85760649004905f80808085335af1610dbf61254f565b5015610df7576040519182527f24b5efa61dd1cfc659205a97fb8ed868f3cb8c81922bab2b96423e5de1de2cb760203393a360015f55005b60405162461bcd60e51b815260206004820152601e60248201527f43726561746f7220726577617264207472616e73666572206661696c656400006044820152606490fd5b60405162461bcd60e51b815260206004820152601660248201527514995dd85c9908185b1c9958591e4818db185a5b595960521b6044820152606490fd5b60405162461bcd60e51b815260206004820152601960248201527f4f6e6c79207468652077696e6e65722063616e20636c61696d000000000000006044820152606490fd5b34610412575f36600319011261041257600c545f805b828110610f765750610ee6906126be565b905f5f5b828110610f075760405160208082528190610902908201876123ca565b610f1081612389565b90549060031b1c805f52600360205260ff600660405f200154161580610f5e575b610f3f575b50600101610eea565b82610f5791610f5160019495886126f0565b5261257e565b9190610f36565b50805f526003602052600460405f2001544210610f31565b610f7f81612389565b90549060031b1c805f52600360205260ff600660405f20015416159081610fc3575b50610faf575b600101610ed5565b90610fbb60019161257e565b919050610fa7565b90505f526003602052600460405f200154421084610fa1565b3461041257602036600319011261041257600435805f52600560205260405f2090815491611009836126a7565b926110176040519485612268565b808452601f19611026826126a7565b01366020860137611036816126a7565b6110436040519182612268565b818152601f19611052836126a7565b015f5b818110611209575050611067826126be565b611070836126be565b9261107a816126be565b94611084826126be565b965f5b838110611157576110ab8a8a8a8a8a8a60405196879660c0885260c088019061234d565b8681036020880152825180825260208201916020808360051b8301019501925f915b83831061111e578a806109028c6111108d6111028e6110f48f8f89820360408b01526123ca565b9087820360608901526123ca565b9085820360808701526123ca565b9083820360a08501526123ca565b91939697989950919394602080611141600193601f198682030187528a51612329565b98019301930190928a99989796959492936110cd565b600190825f52600460205260405f2061117082866123b5565b848060a01b0391549060031b1c16838060a01b03165f52602052600560405f208c6111a484868060a01b03845416926126f0565b526111b0848201612289565b6111ba848b6126f0565b526111c5838a6126f0565b5060028101546111d5848a6126f0565b5260038101546111e5848c6126f0565b5260048101546111f5848d6126f0565b520154611202828c6126f0565b5201611087565b806060602080938601015201611055565b34610412576020366003190112610412576004355f526008602052602060405f2054604051908152f35b34610412575f366003190112610412576020604051662386f26fc100008152f35b34610412575f366003190112610412576001546040516001600160a01b039091168152602090f35b34610412576020366003190112610412576004355f526009602052602060018060a01b0360405f205416604051908152f35b34610412576040366003190112610412576004356024356001600160401b038111610412576112f2903690600401612203565b9190815f52600360205261130e600460405f2001544210612624565b815f52600360205261132a60ff600660405f200154161561242d565b61133760025483106124c5565b5f82815260066020908152604080832033845290915290205460ff1661167f57821561163a57815f52600360205260018060a01b03600160405f2001541633146115f5575f82815260066020908152604080832033845290915290819020805460ff191660011790555160e081016001600160401b0381118282101761079c576040523381526113c836858461258c565b60208281019182525f6040808501828152606086018381526080870184815260a0880185815260c089018681528b87526004885285872033885290975293909420965187546001600160a01b0319166001600160a01b0391909116178755945180519495929460018801916001600160401b03821161079c5761144b8354612230565b601f81116115b0575b50602090601f831160011461151c57936114e197938361150c9b9894600698947f2677bfee56d38ca766d0eb4225f1ac04b415ddf7e37097fcec960084b89fe8e39e9c985f92611511575b50508160011b915f199060031b1c19161790555b51600287015551600386015551600485015551600584015551151591019060ff801983541691151516179055565b835f5260056020526114f63360405f20612666565b60405191829160208352339660208401916125c2565b0390a3005b015190505f8061149f565b90601f19831691845f52815f20925f5b818110611598575084600698947f2677bfee56d38ca766d0eb4225f1ac04b415ddf7e37097fcec960084b89fe8e39e9c98946114e19c989461150c9f9c9860019510611580575b505050811b0190556114b3565b01515f1960f88460031b161c191690555f8080611573565b9293602060018192878601518155019501930161152c565b835f5260205f20601f840160051c810191602085106115eb575b601f0160051c01905b8181106115e05750611454565b5f81556001016115d3565b90915081906115ca565b60405162461bcd60e51b815260206004820152601e60248201527f436f6d70616e792063616e6e6f74206a6f696e206f776e20626f756e747900006044820152606490fd5b60405162461bcd60e51b815260206004820152601b60248201527f436f6e74656e74205552492063616e6e6f7420626520656d70747900000000006044820152606490fd5b60405162461bcd60e51b815260206004820152601a60248201527f416c7265616479206a6f696e6564207468697320626f756e74790000000000006044820152606490fd5b34610412576040366003190112610412576024356004355f52600560205260405f208054821015610412576020916116fb916123b5565b905460405160039290921b1c6001600160a01b03168152f35b346104125760403660031901126104125761172d6121ed565b6004355f52600660205260405f209060018060a01b03165f52602052602060ff60405f2054166040519015158152f35b3461041257602036600319011261041257600154600435906001600160a01b03166117893382146125e2565b61179760025f541415612479565b60025f554782116117f7575f80809381935af16117b261254f565b50156117be5760015f55005b60405162461bcd60e51b815260206004820152601160248201527015da5d1a191c985dd85b0819985a5b1959607a1b6044820152606490fd5b60405162461bcd60e51b8152602060048201526014602482015273496e73756666696369656e742062616c616e636560601b6044820152606490fd5b34610412575f366003190112610412576020600254604051908152f35b34610412576020366003190112610412576004355f52600560205260405f206040519081602082549182815201915f5260205f20905f5b8181106118b2576109028561189e81870382612268565b60405191829160208352602083019061234d565b82546001600160a01b0316845260209093019260019283019201611887565b34610412576040366003190112610412576118ea6121ed565b600480355f908152602091825260408082206001600160a01b03948516835290925220805490911661191e60018301612289565b91600281015490600381015490600481015460ff60066005840154930154169261195a604051978897885260e0602089015260e0880190612329565b9460408701526060860152608085015260a0840152151560c08301520390f35b6060366003190112610412576004356001600160401b038111610412576119a5903690600401612203565b6024356001600160401b038111610412576119c4903690600401612203565b929091604435933415611dfb5742851115611db6578115611d7a57600254936119ec8561257e565b60025560405161010081018181106001600160401b0382111761079c57604052858152611a346020820192338452611a2536878961258c565b9460408401958652369161258c565b60608201908152608082018881523460a084019081525f60c0850181815260e086018281528b8352600360205260409092209551865595516001860180546001600160a01b0319166001600160a01b03929092169190911790559551805195969591939160028601916001600160401b03821161079c578190611ab78454612230565b601f8111611d2a575b50602090601f8311600114611cc7575f92611cbc575b50508160011b915f199060031b1c19161790555b51805160038501916001600160401b03821161079c57611b0a8354612230565b601f8111611c77575b50602090601f8311600114611c0b5791806006969492611b6d9896945f92611c00575b50508160011b915f199060031b1c19161790555b5160048301555160058201550192511515839060ff801983541691151516179055565b51815461ff00191690151560081b61ff0016179055600c54600160401b81101561079c577f4e9ff8debce04524518777fdf120513b8f7e1f434da1099fd190d1aae0d495b692611bc6826001611bec9401600c55612389565b81549060031b9087821b915f19901b1916179055604051926060845260608401916125c2565b9334602083015260408201528033940390a3005b015190508e80611b36565b90601f19831691845f52815f20925f5b818110611c5f5750926001928592611b6d9a989660069a989610611c47575b505050811b019055611b4a565b01515f1960f88460031b161c191690558e8080611c3a565b92936020600181928786015181550195019301611c1b565b835f5260205f20601f840160051c81019160208510611cb2575b601f0160051c01905b818110611ca75750611b13565b5f8155600101611c9a565b9091508190611c91565b015190508d80611ad6565b5f8581528281209350601f198516905b818110611d125750908460019594939210611cfa575b505050811b019055611aea565b01515f1960f88460031b161c191690558d8080611ced565b92936020600181928786015181550195019301611cd7565b909150835f5260205f20601f840160051c81019160208510611d70575b90601f859493920160051c01905b818110611d625750611ac0565b5f8155849350600101611d55565b9091508190611d47565b60405162461bcd60e51b81526020600482015260146024820152734e616d652063616e6e6f7420626520656d70747960601b6044820152606490fd5b60405162461bcd60e51b815260206004820152601e60248201527f446561646c696e65206d75737420626520696e207468652066757475726500006044820152606490fd5b60405162461bcd60e51b815260206004820152601760248201527f52657761726420706f6f6c206d757374206265203e20300000000000000000006044820152606490fd5b346104125760203660031901126104125760043590815f526003602052600460405f200154421061219e5750805f526003602052611e8860ff600660405f200154161561242d565b611e9660025f541415612479565b60025f55611ea760025482106124c5565b805f52600360205260ff600660405f20015460081c161561215957805f52600560205260405f20805415612114575f905f925f5b8254811015611fd257815f52600460205260405f20611efa82856123b5565b60018060a01b0391549060031b1c1660018060a01b03165f5260205260405f206002810154611f2d600383015482612509565b80611fb05750505f905b600481015491603c830292808404603c1490151715610ba857602881029080820460281490151715610ba857600592606480611f7593049104612509565b9182910155858111611f8b575b50600101611edb565b945092506001611f9b84846123b5565b828060a01b0391549060031b1c169390611f82565b606482029180830460641490151715610ba857611fcc91612516565b90611f37565b6001600160a01b038416828682156120dd575f82815260036020818152604080842060068101805460ff1916600117905560098352932080546001600160a01b031916871790555260050154600a8082029180159083049091141715610ba857606490048061206e575b5060207f0c41a0ff919ad03ea54248fcbb933f34c56fae45102c7848a716ad61b9b47e7891604051908152a360015f55005b6001545f918291829182916001600160a01b03165af161208c61254f565b5015612098578361203c565b60405162461bcd60e51b815260206004820152601c60248201527f506c6174666f726d20666565207472616e73666572206661696c6564000000006044820152606490fd5b60405162461bcd60e51b815260206004820152600f60248201526e2737903b30b634b2103bb4b73732b960891b6044820152606490fd5b60405162461bcd60e51b815260206004820152601a60248201527f4e6f2063726561746f727320696e207468697320626f756e74790000000000006044820152606490fd5b60405162461bcd60e51b815260206004820152601a60248201527f436f6d70616e7920686173206e6f74206a7564676564207965740000000000006044820152606490fd5b62461bcd60e51b8152602060048201526014602482015273111958591b1a5b99481b9bdd081c995858da195960621b6044820152606490fd5b600435906001600160a01b038216820361041257565b602435906001600160a01b038216820361041257565b9181601f84011215610412578235916001600160401b038311610412576020838186019501011161041257565b90600182811c9216801561225e575b602083101461224a57565b634e487b7160e01b5f52602260045260245ffd5b91607f169161223f565b90601f801991011681019081106001600160401b0382111761079c57604052565b9060405191825f82549261229c84612230565b808452936001811690811561230757506001146122c3575b506122c192500383612268565b565b90505f9291925260205f20905f915b8183106122eb5750509060206122c1928201015f6122b4565b60209193508060019154838589010152019101909184926122d2565b9050602092506122c194915060ff191682840152151560051b8201015f6122b4565b805180835260209291819084018484015e5f828201840152601f01601f1916010190565b90602080835192838152019201905f5b81811061236a5750505090565b82516001600160a01b031684526020938401939092019160010161235d565b600c548110156123a157600c5f5260205f2001905f90565b634e487b7160e01b5f52603260045260245ffd5b80548210156123a1575f5260205f2001905f90565b90602080835192838152019201905f5b8181106123e75750505090565b82518452602093840193909201916001016123da565b9181601f84011215610412578235916001600160401b038311610412576020808501948460051b01011161041257565b1561243457565b60405162461bcd60e51b815260206004820152601860248201527f426f756e747920616c72656164792066696e616c697a656400000000000000006044820152606490fd5b1561248057565b60405162461bcd60e51b815260206004820152601f60248201527f5265656e7472616e637947756172643a207265656e7472616e742063616c6c006044820152606490fd5b156124cc57565b60405162461bcd60e51b8152602060048201526015602482015274109bdd5b9d1e48191bd95cc81b9bdd08195e1a5cdd605a1b6044820152606490fd5b91908201809211610ba857565b8115612520570490565b634e487b7160e01b5f52601260045260245ffd5b6001600160401b03811161079c57601f01601f191660200190565b3d15612579573d9061256082612534565b9161256e6040519384612268565b82523d5f602084013e565b606090565b5f198114610ba85760010190565b92919261259882612534565b916125a66040519384612268565b829481845281830111610412578281602093845f960137010152565b908060209392818452848401375f828201840152601f01601f1916010190565b156125e957565b60405162461bcd60e51b815260206004820152601360248201527227b7363c90383630ba3337b9369037bbb732b960691b6044820152606490fd5b1561262b57565b60405162461bcd60e51b8152602060048201526013602482015272111958591b1a5b99481a185cc81c185cdcd959606a1b6044820152606490fd5b8054600160401b81101561079c57612683916001820181556123b5565b81546001600160a01b0393841660039290921b91821b9390911b1916919091179055565b6001600160401b03811161079c5760051b60200190565b906126c8826126a7565b6126d56040519182612268565b82815280926126e6601f19916126a7565b0190602036910137565b80518210156123a15760209160051b010190565b1561270b57565b60405162461bcd60e51b8152602060048201526014602482015273109bdd5b9d1e481b9bdd08199a5b985b1a5e995960621b6044820152606490fd5b1561274e57565b60405162461bcd60e51b815260206004820152601a60248201527f43726561746f72206e6f7420696e207468697320626f756e74790000000000006044820152606490fd5b91908110156123a15760051b0190565b356001600160a01b0381168103610412579056fea2646970667358221220a8ebd273d5fa7d08ffff1440a56ca5b7e81bcf4ec0be7394e60be7bccdffdf0d64736f6c634300081c0033",
+  "deployedBytecode": "0x608080604052600436101561001c575b50361561001a575f80fd5b005b5f3560e01c908163191634c314611e40575080631e75a1dc1461087f5780632bfa7d601461197a5780633430754a146118d15780633afb7959146118505780633e362c96146118335780635312ea8e1461175d5780636819471914611714578063735d1654146116c45780637ccbcccb146112bf578063800be0ce1461128d5780638da5cb5b1461126557806395beeae814611244578063a30f0e2c1461121a578063a34b46fe14610fdc578063b4e5126914610ebf578063ba2f036214610cfa578063c893b82f146109e6578063da321ff5146109bc578063dc2f874414610906578063dc4cfee61461087f578063e2cdd42a1461057d578063ee8c4bbf146104ac578063f2fde38b146104165763f4aeb0dc1461013b575f61000f565b34610412576060366003190112610412576004356024356001600160401b0381116104125761016e9036906004016123fd565b906044356001600160401b0381116104125761018e9036906004016123fd565b5f8581526003602052604090206001015491939092916001600160a01b031633036103d757845f5260036020526101cf60ff600660405f200154161561242d565b6101dc60025486106124c5565b845f52600360205260ff600660405f20015460081c166103a15782810361036357801561031e575f5b8181106102515785805f526003602052600660405f200161010061ff001982541617905533907f62a59899ec1522f6263db24df3c2b0fe1cc0d79b83b84fe91ff87eb8e8f33d945f80a3005b855f52600660205260405f2061027061026b838587612793565b6127a3565b60018060a01b03165f5260205261028d60ff60405f205416612747565b606461029a828688612793565b35116102e357806102ae6001928688612793565b35875f52600460205260405f206102c961026b848789612793565b848060a01b03165f52602052600460405f20015501610205565b60405162461bcd60e51b8152602060048201526013602482015272053636f7265206d75737420626520302d31303606c1b6044820152606490fd5b60405162461bcd60e51b815260206004820152601f60248201527f4d7573742073636f7265206174206c65617374206f6e652063726561746f72006044820152606490fd5b60405162461bcd60e51b8152602060048201526016602482015275082e4e4c2f2e640d8cadccee8d040dad2e6dac2e8c6d60531b6044820152606490fd5b60405162461bcd60e51b815260206004820152600e60248201526d105b1c9958591e481a9d5919d95960921b6044820152606490fd5b60405162461bcd60e51b81526020600482015260136024820152724f6e6c7920626f756e747920636f6d70616e7960681b6044820152606490fd5b5f80fd5b346104125760203660031901126104125761042f6121d7565b60015490610447336001600160a01b038416146125e2565b6001600160a01b0316908115610467576001600160a01b03191617600155005b60405162461bcd60e51b815260206004820152601960248201527f4e6577206f776e6572206973207a65726f2061646472657373000000000000006044820152606490fd5b3461041257602036600319011261041257600435805f52600360205260405f209081549060018060a01b036001840154169260ff60048201549260058301546006840154915f52600960205261055360018060a01b0360405f20541694610545610524600361051d60028501612289565b9301612289565b916040519a8b9a8b5260208b015261012060408b01526101208a0190612329565b9088820360608a0152612329565b94608087015260a0860152818116151560c086015260081c16151560e08401526101008301520390f35b6060366003190112610412576004356105946121ed565b604435918215159182840361041257815f5260036020526105bd600460405f2001544210612624565b815f5260036020526105d960ff600660405f200154161561242d565b6105e660025483106124c5565b662386f26fc10000341061083a57815f52600660205260405f2060018060a01b0382165f5260205261061e60ff60405f205416612747565b335f52600760205260405f20825f5260205260ff600160405f20015460a81c166107f5576001600160a01b0316923384146107b057604051608081018181106001600160401b0382111761079c576040908152348083526020808401888152848401888152600160608701818152335f908152600786528781208b82528652878120985189559351979091018054925191516001600160b01b03199093166001600160a01b03989098169790971790151560a01b60ff60a01b161790151560a81b60ff60a81b1617909455600890529120805490916106fc91612509565b9055815f52600b6020526107133360405f20612666565b1561077257805f52600460205260405f20835f52602052600260405f200161073b815461257e565b90555b6040519182523460208301527fe67bcbb082983775f52d474de7e0b293ee14bebef1dadab2923061af3972cad060403393a4005b805f52600460205260405f20835f52602052600360405f2001610795815461257e565b905561073e565b634e487b7160e01b5f52604160045260245ffd5b60405162461bcd60e51b815260206004820152601860248201527f43616e6e6f7420766f746520666f7220796f757273656c6600000000000000006044820152606490fd5b60405162461bcd60e51b815260206004820152601c60248201527f416c726561647920766f74656420696e207468697320626f756e7479000000006044820152606490fd5b60405162461bcd60e51b815260206004820152601e60248201527f5374616b652062656c6f77206d696e696d756d2028302e3031204d4f4e2900006044820152606490fd5b34610412576040366003190112610412576001600160a01b036108a06121d7565b165f9081526007602090815260408083206024358452825291829020805460019091015483519182526001600160a01b0381169282019290925260ff60a083901c811615159382019390935260a89190911c9091161515606082015280608081015b0390f35b34610412576020366003190112610412576004355f908152600360205260409020805460018201546001600160a01b03169160ff61094660028301612289565b61095260038401612289565b9261099860048201549461098a6006600585015494015494604051998a998a5260208a015261010060408a0152610100890190612329565b908782036060890152612329565b93608086015260a0850152818116151560c085015260081c16151560e08301520390f35b34610412576020366003190112610412576004355f52600a602052602060405f2054604051908152f35b3461041257602036600319011261041257600435610a0860025f541415612479565b60025f55805f526003602052610a2760ff600660405f20015416612704565b335f52600760205260405f20815f5260205260405f209060018201549160ff8360a81c1615610cbf578054908115610c88575f9081905582815260096020526040902054909283916001600160a01b038083169116149081610c7a575b50610b18575b505f80808085335af1610a9b61254f565b5015610ad3576040519182527f22260a4a3f904a70c4b83f22f2b995fcd9c0b70ea78a18dc3b76fbd9426fc5b060203393a360015f55005b60405162461bcd60e51b815260206004820152601c60248201527f566f74657220726577617264207472616e73666572206661696c6564000000006044820152606490fd5b815f526003602052600560405f200154601481029080820460141490151715610ba8576064900490825f52600a60205260405f205415610bbc575b825f52600a60205260405f2054610b6b575b50610a8a565b9091925080820291808304821490151715610ba857610b9a610ba092845f52600a60205260405f205490612516565b90612509565b908280610b65565b634e487b7160e01b5f52601160045260245ffd5b5f838152600b6020908152604080832060099092528220548154916001600160a01b0390911690835b838110610c025750505050835f52600a60205260405f2055610b53565b610c0c81836123b5565b60018060a01b0391549060031b1c165f52600760205260405f20885f5260205260405f2060018101548460018060a01b038216149081610c6c575b50610c56575b50600101610be5565b60019195610c65915490612509565b9490610c4d565b60ff915060a01c168b610c47565b60ff915060a01c1684610a84565b60405162461bcd60e51b815260206004820152600f60248201526e105b1c9958591e4818db185a5b5959608a1b6044820152606490fd5b60405162461bcd60e51b8152602060048201526013602482015272139bc81d9bdd19481cdd185ad948199bdd5b99606a1b6044820152606490fd5b3461041257602036600319011261041257600435610d1c60025f541415612479565b60025f55805f526003602052610d3b60ff600660405f20015416612704565b5f818152600960205260409020546001600160a01b03163303610e7a575f8181526004602090815260408083203384529091529020600601805460ff8116610e3c5760019060ff1916179055805f526003602052600560405f200154604681029080820460461490151715610ba85760649004905f80808085335af1610dbf61254f565b5015610df7576040519182527f24b5efa61dd1cfc659205a97fb8ed868f3cb8c81922bab2b96423e5de1de2cb760203393a360015f55005b60405162461bcd60e51b815260206004820152601e60248201527f43726561746f7220726577617264207472616e73666572206661696c656400006044820152606490fd5b60405162461bcd60e51b815260206004820152601660248201527514995dd85c9908185b1c9958591e4818db185a5b595960521b6044820152606490fd5b60405162461bcd60e51b815260206004820152601960248201527f4f6e6c79207468652077696e6e65722063616e20636c61696d000000000000006044820152606490fd5b34610412575f36600319011261041257600c545f805b828110610f765750610ee6906126be565b905f5f5b828110610f075760405160208082528190610902908201876123ca565b610f1081612389565b90549060031b1c805f52600360205260ff600660405f200154161580610f5e575b610f3f575b50600101610eea565b82610f5791610f5160019495886126f0565b5261257e565b9190610f36565b50805f526003602052600460405f2001544210610f31565b610f7f81612389565b90549060031b1c805f52600360205260ff600660405f20015416159081610fc3575b50610faf575b600101610ed5565b90610fbb60019161257e565b919050610fa7565b90505f526003602052600460405f200154421084610fa1565b3461041257602036600319011261041257600435805f52600560205260405f2090815491611009836126a7565b926110176040519485612268565b808452601f19611026826126a7565b01366020860137611036816126a7565b6110436040519182612268565b818152601f19611052836126a7565b015f5b818110611209575050611067826126be565b611070836126be565b9261107a816126be565b94611084826126be565b965f5b838110611157576110ab8a8a8a8a8a8a60405196879660c0885260c088019061234d565b8681036020880152825180825260208201916020808360051b8301019501925f915b83831061111e578a806109028c6111108d6111028e6110f48f8f89820360408b01526123ca565b9087820360608901526123ca565b9085820360808701526123ca565b9083820360a08501526123ca565b91939697989950919394602080611141600193601f198682030187528a51612329565b98019301930190928a99989796959492936110cd565b600190825f52600460205260405f2061117082866123b5565b848060a01b0391549060031b1c16838060a01b03165f52602052600560405f208c6111a484868060a01b03845416926126f0565b526111b0848201612289565b6111ba848b6126f0565b526111c5838a6126f0565b5060028101546111d5848a6126f0565b5260038101546111e5848c6126f0565b5260048101546111f5848d6126f0565b520154611202828c6126f0565b5201611087565b806060602080938601015201611055565b34610412576020366003190112610412576004355f526008602052602060405f2054604051908152f35b34610412575f366003190112610412576020604051662386f26fc100008152f35b34610412575f366003190112610412576001546040516001600160a01b039091168152602090f35b34610412576020366003190112610412576004355f526009602052602060018060a01b0360405f205416604051908152f35b34610412576040366003190112610412576004356024356001600160401b038111610412576112f2903690600401612203565b9190815f52600360205261130e600460405f2001544210612624565b815f52600360205261132a60ff600660405f200154161561242d565b61133760025483106124c5565b5f82815260066020908152604080832033845290915290205460ff1661167f57821561163a57815f52600360205260018060a01b03600160405f2001541633146115f5575f82815260066020908152604080832033845290915290819020805460ff191660011790555160e081016001600160401b0381118282101761079c576040523381526113c836858461258c565b60208281019182525f6040808501828152606086018381526080870184815260a0880185815260c089018681528b87526004885285872033885290975293909420965187546001600160a01b0319166001600160a01b0391909116178755945180519495929460018801916001600160401b03821161079c5761144b8354612230565b601f81116115b0575b50602090601f831160011461151c57936114e197938361150c9b9894600698947f2677bfee56d38ca766d0eb4225f1ac04b415ddf7e37097fcec960084b89fe8e39e9c985f92611511575b50508160011b915f199060031b1c19161790555b51600287015551600386015551600485015551600584015551151591019060ff801983541691151516179055565b835f5260056020526114f63360405f20612666565b60405191829160208352339660208401916125c2565b0390a3005b015190505f8061149f565b90601f19831691845f52815f20925f5b818110611598575084600698947f2677bfee56d38ca766d0eb4225f1ac04b415ddf7e37097fcec960084b89fe8e39e9c98946114e19c989461150c9f9c9860019510611580575b505050811b0190556114b3565b01515f1960f88460031b161c191690555f8080611573565b9293602060018192878601518155019501930161152c565b835f5260205f20601f840160051c810191602085106115eb575b601f0160051c01905b8181106115e05750611454565b5f81556001016115d3565b90915081906115ca565b60405162461bcd60e51b815260206004820152601e60248201527f436f6d70616e792063616e6e6f74206a6f696e206f776e20626f756e747900006044820152606490fd5b60405162461bcd60e51b815260206004820152601b60248201527f436f6e74656e74205552492063616e6e6f7420626520656d70747900000000006044820152606490fd5b60405162461bcd60e51b815260206004820152601a60248201527f416c7265616479206a6f696e6564207468697320626f756e74790000000000006044820152606490fd5b34610412576040366003190112610412576024356004355f52600560205260405f208054821015610412576020916116fb916123b5565b905460405160039290921b1c6001600160a01b03168152f35b346104125760403660031901126104125761172d6121ed565b6004355f52600660205260405f209060018060a01b03165f52602052602060ff60405f2054166040519015158152f35b3461041257602036600319011261041257600154600435906001600160a01b03166117893382146125e2565b61179760025f541415612479565b60025f554782116117f7575f80809381935af16117b261254f565b50156117be5760015f55005b60405162461bcd60e51b815260206004820152601160248201527015da5d1a191c985dd85b0819985a5b1959607a1b6044820152606490fd5b60405162461bcd60e51b8152602060048201526014602482015273496e73756666696369656e742062616c616e636560601b6044820152606490fd5b34610412575f366003190112610412576020600254604051908152f35b34610412576020366003190112610412576004355f52600560205260405f206040519081602082549182815201915f5260205f20905f5b8181106118b2576109028561189e81870382612268565b60405191829160208352602083019061234d565b82546001600160a01b0316845260209093019260019283019201611887565b34610412576040366003190112610412576118ea6121ed565b600480355f908152602091825260408082206001600160a01b03948516835290925220805490911661191e60018301612289565b91600281015490600381015490600481015460ff60066005840154930154169261195a604051978897885260e0602089015260e0880190612329565b9460408701526060860152608085015260a0840152151560c08301520390f35b6060366003190112610412576004356001600160401b038111610412576119a5903690600401612203565b6024356001600160401b038111610412576119c4903690600401612203565b929091604435933415611dfb5742851115611db6578115611d7a57600254936119ec8561257e565b60025560405161010081018181106001600160401b0382111761079c57604052858152611a346020820192338452611a2536878961258c565b9460408401958652369161258c565b60608201908152608082018881523460a084019081525f60c0850181815260e086018281528b8352600360205260409092209551865595516001860180546001600160a01b0319166001600160a01b03929092169190911790559551805195969591939160028601916001600160401b03821161079c578190611ab78454612230565b601f8111611d2a575b50602090601f8311600114611cc7575f92611cbc575b50508160011b915f199060031b1c19161790555b51805160038501916001600160401b03821161079c57611b0a8354612230565b601f8111611c77575b50602090601f8311600114611c0b5791806006969492611b6d9896945f92611c00575b50508160011b915f199060031b1c19161790555b5160048301555160058201550192511515839060ff801983541691151516179055565b51815461ff00191690151560081b61ff0016179055600c54600160401b81101561079c577f4e9ff8debce04524518777fdf120513b8f7e1f434da1099fd190d1aae0d495b692611bc6826001611bec9401600c55612389565b81549060031b9087821b915f19901b1916179055604051926060845260608401916125c2565b9334602083015260408201528033940390a3005b015190508e80611b36565b90601f19831691845f52815f20925f5b818110611c5f5750926001928592611b6d9a989660069a989610611c47575b505050811b019055611b4a565b01515f1960f88460031b161c191690558e8080611c3a565b92936020600181928786015181550195019301611c1b565b835f5260205f20601f840160051c81019160208510611cb2575b601f0160051c01905b818110611ca75750611b13565b5f8155600101611c9a565b9091508190611c91565b015190508d80611ad6565b5f8581528281209350601f198516905b818110611d125750908460019594939210611cfa575b505050811b019055611aea565b01515f1960f88460031b161c191690558d8080611ced565b92936020600181928786015181550195019301611cd7565b909150835f5260205f20601f840160051c81019160208510611d70575b90601f859493920160051c01905b818110611d625750611ac0565b5f8155849350600101611d55565b9091508190611d47565b60405162461bcd60e51b81526020600482015260146024820152734e616d652063616e6e6f7420626520656d70747960601b6044820152606490fd5b60405162461bcd60e51b815260206004820152601e60248201527f446561646c696e65206d75737420626520696e207468652066757475726500006044820152606490fd5b60405162461bcd60e51b815260206004820152601760248201527f52657761726420706f6f6c206d757374206265203e20300000000000000000006044820152606490fd5b346104125760203660031901126104125760043590815f526003602052600460405f200154421061219e5750805f526003602052611e8860ff600660405f200154161561242d565b611e9660025f541415612479565b60025f55611ea760025482106124c5565b805f52600360205260ff600660405f20015460081c161561215957805f52600560205260405f20805415612114575f905f925f5b8254811015611fd257815f52600460205260405f20611efa82856123b5565b60018060a01b0391549060031b1c1660018060a01b03165f5260205260405f206002810154611f2d600383015482612509565b80611fb05750505f905b600481015491603c830292808404603c1490151715610ba857602881029080820460281490151715610ba857600592606480611f7593049104612509565b9182910155858111611f8b575b50600101611edb565b945092506001611f9b84846123b5565b828060a01b0391549060031b1c169390611f82565b606482029180830460641490151715610ba857611fcc91612516565b90611f37565b6001600160a01b038416828682156120dd575f82815260036020818152604080842060068101805460ff1916600117905560098352932080546001600160a01b031916871790555260050154600a8082029180159083049091141715610ba857606490048061206e575b5060207f0c41a0ff919ad03ea54248fcbb933f34c56fae45102c7848a716ad61b9b47e7891604051908152a360015f55005b6001545f918291829182916001600160a01b03165af161208c61254f565b5015612098578361203c565b60405162461bcd60e51b815260206004820152601c60248201527f506c6174666f726d20666565207472616e73666572206661696c6564000000006044820152606490fd5b60405162461bcd60e51b815260206004820152600f60248201526e2737903b30b634b2103bb4b73732b960891b6044820152606490fd5b60405162461bcd60e51b815260206004820152601a60248201527f4e6f2063726561746f727320696e207468697320626f756e74790000000000006044820152606490fd5b60405162461bcd60e51b815260206004820152601a60248201527f436f6d70616e7920686173206e6f74206a7564676564207965740000000000006044820152606490fd5b62461bcd60e51b8152602060048201526014602482015273111958591b1a5b99481b9bdd081c995858da195960621b6044820152606490fd5b600435906001600160a01b038216820361041257565b602435906001600160a01b038216820361041257565b9181601f84011215610412578235916001600160401b038311610412576020838186019501011161041257565b90600182811c9216801561225e575b602083101461224a57565b634e487b7160e01b5f52602260045260245ffd5b91607f169161223f565b90601f801991011681019081106001600160401b0382111761079c57604052565b9060405191825f82549261229c84612230565b808452936001811690811561230757506001146122c3575b506122c192500383612268565b565b90505f9291925260205f20905f915b8183106122eb5750509060206122c1928201015f6122b4565b60209193508060019154838589010152019101909184926122d2565b9050602092506122c194915060ff191682840152151560051b8201015f6122b4565b805180835260209291819084018484015e5f828201840152601f01601f1916010190565b90602080835192838152019201905f5b81811061236a5750505090565b82516001600160a01b031684526020938401939092019160010161235d565b600c548110156123a157600c5f5260205f2001905f90565b634e487b7160e01b5f52603260045260245ffd5b80548210156123a1575f5260205f2001905f90565b90602080835192838152019201905f5b8181106123e75750505090565b82518452602093840193909201916001016123da565b9181601f84011215610412578235916001600160401b038311610412576020808501948460051b01011161041257565b1561243457565b60405162461bcd60e51b815260206004820152601860248201527f426f756e747920616c72656164792066696e616c697a656400000000000000006044820152606490fd5b1561248057565b60405162461bcd60e51b815260206004820152601f60248201527f5265656e7472616e637947756172643a207265656e7472616e742063616c6c006044820152606490fd5b156124cc57565b60405162461bcd60e51b8152602060048201526015602482015274109bdd5b9d1e48191bd95cc81b9bdd08195e1a5cdd605a1b6044820152606490fd5b91908201809211610ba857565b8115612520570490565b634e487b7160e01b5f52601260045260245ffd5b6001600160401b03811161079c57601f01601f191660200190565b3d15612579573d9061256082612534565b9161256e6040519384612268565b82523d5f602084013e565b606090565b5f198114610ba85760010190565b92919261259882612534565b916125a66040519384612268565b829481845281830111610412578281602093845f960137010152565b908060209392818452848401375f828201840152601f01601f1916010190565b156125e957565b60405162461bcd60e51b815260206004820152601360248201527227b7363c90383630ba3337b9369037bbb732b960691b6044820152606490fd5b1561262b57565b60405162461bcd60e51b8152602060048201526013602482015272111958591b1a5b99481a185cc81c185cdcd959606a1b6044820152606490fd5b8054600160401b81101561079c57612683916001820181556123b5565b81546001600160a01b0393841660039290921b91821b9390911b1916919091179055565b6001600160401b03811161079c5760051b60200190565b906126c8826126a7565b6126d56040519182612268565b82815280926126e6601f19916126a7565b0190602036910137565b80518210156123a15760209160051b010190565b1561270b57565b60405162461bcd60e51b8152602060048201526014602482015273109bdd5b9d1e481b9bdd08199a5b985b1a5e995960621b6044820152606490fd5b1561274e57565b60405162461bcd60e51b815260206004820152601a60248201527f43726561746f72206e6f7420696e207468697320626f756e74790000000000006044820152606490fd5b91908110156123a15760051b0190565b356001600160a01b0381168103610412579056fea2646970667358221220a8ebd273d5fa7d08ffff1440a56ca5b7e81bcf4ec0be7394e60be7bccdffdf0d64736f6c634300081c0033",
+  "devdoc": {
+    "kind": "dev",
+    "methods": {
+      "claimCreatorReward(uint256)": {
+        "params": {
+          "bountyId": "The finalized bounty"
+        }
+      },
+      "claimVoterReward(uint256)": {
+        "params": {
+          "bountyId": "The finalized bounty"
+        }
+      },
+      "companyJudge(uint256,address[],uint256[])": {
+        "params": {
+          "bountyId": "The bounty to judge",
+          "creators": "Array of creator addresses to score",
+          "scores": "Corresponding scores (0-100) for each creator"
+        }
+      },
+      "createBounty(string,string,uint256)": {
+        "params": {
+          "_deadline": "Unix timestamp after which submissions and votes close",
+          "_description": "Detailed description of what creators should produce",
+          "_name": "Short title for the bounty"
+        }
+      },
+      "emergencyWithdraw(uint256)": {
+        "params": {
+          "amount": "The amount to withdraw"
+        }
+      },
+      "finalizeBounty(uint256)": {
+        "params": {
+          "bountyId": "The bounty to finalize"
+        }
+      },
+      "getActiveBounties()": {
+        "returns": {
+          "activeIds": "Array of active bounty IDs"
+        }
+      },
+      "getBounty(uint256)": {
+        "params": {
+          "bountyId": "The bounty to query"
+        }
+      },
+      "getBountyCreators(uint256)": {
+        "params": {
+          "bountyId": "The bounty to query"
+        },
+        "returns": {
+          "_0": "Array of creator addresses"
+        }
+      },
+      "getLeaderboard(uint256)": {
+        "params": {
+          "bountyId": "The bounty to query"
+        },
+        "returns": {
+          "companyScores": "Array of company-assigned scores",
+          "contentURIs": " Array of content URIs",
+          "creators_": "   Array of creator addresses",
+          "downvotes_": "  Array of downvote counts",
+          "totalScores": " Array of weighted final scores (0 until finalized)",
+          "upvotes_": "    Array of upvote counts"
+        }
+      },
+      "getVoteInfo(address,uint256)": {
+        "params": {
+          "bountyId": "The bounty to query",
+          "voter": "The voter address"
+        }
+      },
+      "joinBounty(uint256,string)": {
+        "params": {
+          "bountyId": "The bounty to join",
+          "contentURI": "IPFS hash or URL pointing to the creator's submission"
+        }
+      },
+      "transferOwnership(address)": {
+        "params": {
+          "newOwner": "The new platform owner address"
+        }
+      },
+      "vote(uint256,address,bool)": {
+        "params": {
+          "bountyId": "The bounty context",
+          "creator": "The creator to vote on",
+          "isUpvote": "true = upvote, false = downvote"
+        }
+      }
+    },
+    "stateVariables": {
+      "_bountyVoters": {
+        "details": "bountyId => list of all voter addresses (for winner-stake computation)"
+      },
+      "allBountyIds": {
+        "details": "Track all bounty IDs for enumeration"
+      },
+      "bounties": {
+        "details": "bountyId => Bounty"
+      },
+      "bountyCreators": {
+        "details": "bountyId => ordered list of creator addresses"
+      },
+      "bountyWinner": {
+        "details": "bountyId => winner address (set on finalization)"
+      },
+      "creatorEntries": {
+        "details": "bountyId => creator address => CreatorEntry"
+      },
+      "hasJoined": {
+        "details": "bountyId => creator address => true if already joined"
+      },
+      "totalStakedPerBounty": {
+        "details": "bountyId => total MON staked by all voters"
+      },
+      "voteStakes": {
+        "details": "voter address => bountyId => VoteStake"
+      },
+      "winnerTotalStake": {
+        "details": "bountyId => total stake placed on the winning creator"
+      }
+    },
+    "title": "BountyPlatform",
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {
+      "claimCreatorReward(uint256)": {
+        "notice": "Winner claims 70% of the reward pool."
+      },
+      "claimVoterReward(uint256)": {
+        "notice": "Voters claim their stake back. If they voted for the winner, they also         receive a proportional share of 20% of the reward pool."
+      },
+      "companyJudge(uint256,address[],uint256[])": {
+        "notice": "Company scores each creator 0-100. Can only be called once per bounty."
+      },
+      "createBounty(string,string,uint256)": {
+        "notice": "Create a new bounty. The sent MON becomes the reward pool."
+      },
+      "emergencyWithdraw(uint256)": {
+        "notice": "Emergency withdrawal for unclaimed funds after a long period.         Only callable by the platform owner."
+      },
+      "finalizeBounty(uint256)": {
+        "notice": "Finalize the bounty: compute final scores, determine winner, pay platform fee.         Anyone can call after deadline + company has judged."
+      },
+      "getActiveBounties()": {
+        "notice": "Get all active (not finalized, deadline not passed) bounty IDs."
+      },
+      "getBounty(uint256)": {
+        "notice": "Get full details of a specific bounty."
+      },
+      "getBountyCreators(uint256)": {
+        "notice": "Get the list of creator addresses for a bounty."
+      },
+      "getLeaderboard(uint256)": {
+        "notice": "Get the full leaderboard for a bounty."
+      },
+      "getVoteInfo(address,uint256)": {
+        "notice": "Get a voter's stake info for a specific bounty."
+      },
+      "joinBounty(uint256,string)": {
+        "notice": "Join a bounty by submitting content."
+      },
+      "transferOwnership(address)": {
+        "notice": "Transfer platform ownership."
+      },
+      "vote(uint256,address,bool)": {
+        "notice": "Vote on a creator's submission by staking MON.         Each wallet gets exactly one vote per bounty (up or down on one creator)."
+      }
+    },
+    "notice": "A Social-Fi bounty platform for Monad where companies post bounties,         creators submit content, and the community votes with staked MON.         Scoring: 60% company judge + 40% community votes.         Reward split: 70% winner, 20% winning voters, 10% platform.",
+    "version": 1
+  },
+  "storageLayout": {
+    "storage": [
+      {
+        "astId": 11,
+        "contract": "contracts/BountyPlatform.sol:BountyPlatform",
+        "label": "_status",
+        "offset": 0,
+        "slot": "0",
+        "type": "t_uint256"
+      },
+      {
+        "astId": 73,
+        "contract": "contracts/BountyPlatform.sol:BountyPlatform",
+        "label": "owner",
+        "offset": 0,
+        "slot": "1",
+        "type": "t_address"
+      },
+      {
+        "astId": 75,
+        "contract": "contracts/BountyPlatform.sol:BountyPlatform",
+        "label": "bountyCount",
+        "offset": 0,
+        "slot": "2",
+        "type": "t_uint256"
+      },
+      {
+        "astId": 84,
+        "contract": "contracts/BountyPlatform.sol:BountyPlatform",
+        "label": "bounties",
+        "offset": 0,
+        "slot": "3",
+        "type": "t_mapping(t_uint256,t_struct(Bounty)47_storage)"
+      },
+      {
+        "astId": 92,
+        "contract": "contracts/BountyPlatform.sol:BountyPlatform",
+        "label": "creatorEntries",
+        "offset": 0,
+        "slot": "4",
+        "type": "t_mapping(t_uint256,t_mapping(t_address,t_struct(CreatorEntry)62_storage))"
+      },
+      {
+        "astId": 98,
+        "contract": "contracts/BountyPlatform.sol:BountyPlatform",
+        "label": "bountyCreators",
+        "offset": 0,
+        "slot": "5",
+        "type": "t_mapping(t_uint256,t_array(t_address)dyn_storage)"
+      },
+      {
+        "astId": 105,
+        "contract": "contracts/BountyPlatform.sol:BountyPlatform",
+        "label": "hasJoined",
+        "offset": 0,
+        "slot": "6",
+        "type": "t_mapping(t_uint256,t_mapping(t_address,t_bool))"
+      },
+      {
+        "astId": 113,
+        "contract": "contracts/BountyPlatform.sol:BountyPlatform",
+        "label": "voteStakes",
+        "offset": 0,
+        "slot": "7",
+        "type": "t_mapping(t_address,t_mapping(t_uint256,t_struct(VoteStake)71_storage))"
+      },
+      {
+        "astId": 118,
+        "contract": "contracts/BountyPlatform.sol:BountyPlatform",
+        "label": "totalStakedPerBounty",
+        "offset": 0,
+        "slot": "8",
+        "type": "t_mapping(t_uint256,t_uint256)"
+      },
+      {
+        "astId": 123,
+        "contract": "contracts/BountyPlatform.sol:BountyPlatform",
+        "label": "bountyWinner",
+        "offset": 0,
+        "slot": "9",
+        "type": "t_mapping(t_uint256,t_address)"
+      },
+      {
+        "astId": 128,
+        "contract": "contracts/BountyPlatform.sol:BountyPlatform",
+        "label": "winnerTotalStake",
+        "offset": 0,
+        "slot": "10",
+        "type": "t_mapping(t_uint256,t_uint256)"
+      },
+      {
+        "astId": 134,
+        "contract": "contracts/BountyPlatform.sol:BountyPlatform",
+        "label": "_bountyVoters",
+        "offset": 0,
+        "slot": "11",
+        "type": "t_mapping(t_uint256,t_array(t_address)dyn_storage)"
+      },
+      {
+        "astId": 138,
+        "contract": "contracts/BountyPlatform.sol:BountyPlatform",
+        "label": "allBountyIds",
+        "offset": 0,
+        "slot": "12",
+        "type": "t_array(t_uint256)dyn_storage"
+      }
+    ],
+    "types": {
+      "t_address": {
+        "encoding": "inplace",
+        "label": "address",
+        "numberOfBytes": "20"
+      },
+      "t_array(t_address)dyn_storage": {
+        "base": "t_address",
+        "encoding": "dynamic_array",
+        "label": "address[]",
+        "numberOfBytes": "32"
+      },
+      "t_array(t_uint256)dyn_storage": {
+        "base": "t_uint256",
+        "encoding": "dynamic_array",
+        "label": "uint256[]",
+        "numberOfBytes": "32"
+      },
+      "t_bool": {
+        "encoding": "inplace",
+        "label": "bool",
+        "numberOfBytes": "1"
+      },
+      "t_mapping(t_address,t_bool)": {
+        "encoding": "mapping",
+        "key": "t_address",
+        "label": "mapping(address => bool)",
+        "numberOfBytes": "32",
+        "value": "t_bool"
+      },
+      "t_mapping(t_address,t_mapping(t_uint256,t_struct(VoteStake)71_storage))": {
+        "encoding": "mapping",
+        "key": "t_address",
+        "label": "mapping(address => mapping(uint256 => struct BountyPlatform.VoteStake))",
+        "numberOfBytes": "32",
+        "value": "t_mapping(t_uint256,t_struct(VoteStake)71_storage)"
+      },
+      "t_mapping(t_address,t_struct(CreatorEntry)62_storage)": {
+        "encoding": "mapping",
+        "key": "t_address",
+        "label": "mapping(address => struct BountyPlatform.CreatorEntry)",
+        "numberOfBytes": "32",
+        "value": "t_struct(CreatorEntry)62_storage"
+      },
+      "t_mapping(t_uint256,t_address)": {
+        "encoding": "mapping",
+        "key": "t_uint256",
+        "label": "mapping(uint256 => address)",
+        "numberOfBytes": "32",
+        "value": "t_address"
+      },
+      "t_mapping(t_uint256,t_array(t_address)dyn_storage)": {
+        "encoding": "mapping",
+        "key": "t_uint256",
+        "label": "mapping(uint256 => address[])",
+        "numberOfBytes": "32",
+        "value": "t_array(t_address)dyn_storage"
+      },
+      "t_mapping(t_uint256,t_mapping(t_address,t_bool))": {
+        "encoding": "mapping",
+        "key": "t_uint256",
+        "label": "mapping(uint256 => mapping(address => bool))",
+        "numberOfBytes": "32",
+        "value": "t_mapping(t_address,t_bool)"
+      },
+      "t_mapping(t_uint256,t_mapping(t_address,t_struct(CreatorEntry)62_storage))": {
+        "encoding": "mapping",
+        "key": "t_uint256",
+        "label": "mapping(uint256 => mapping(address => struct BountyPlatform.CreatorEntry))",
+        "numberOfBytes": "32",
+        "value": "t_mapping(t_address,t_struct(CreatorEntry)62_storage)"
+      },
+      "t_mapping(t_uint256,t_struct(Bounty)47_storage)": {
+        "encoding": "mapping",
+        "key": "t_uint256",
+        "label": "mapping(uint256 => struct BountyPlatform.Bounty)",
+        "numberOfBytes": "32",
+        "value": "t_struct(Bounty)47_storage"
+      },
+      "t_mapping(t_uint256,t_struct(VoteStake)71_storage)": {
+        "encoding": "mapping",
+        "key": "t_uint256",
+        "label": "mapping(uint256 => struct BountyPlatform.VoteStake)",
+        "numberOfBytes": "32",
+        "value": "t_struct(VoteStake)71_storage"
+      },
+      "t_mapping(t_uint256,t_uint256)": {
+        "encoding": "mapping",
+        "key": "t_uint256",
+        "label": "mapping(uint256 => uint256)",
+        "numberOfBytes": "32",
+        "value": "t_uint256"
+      },
+      "t_string_storage": {
+        "encoding": "bytes",
+        "label": "string",
+        "numberOfBytes": "32"
+      },
+      "t_struct(Bounty)47_storage": {
+        "encoding": "inplace",
+        "label": "struct BountyPlatform.Bounty",
+        "members": [
+          {
+            "astId": 32,
+            "contract": "contracts/BountyPlatform.sol:BountyPlatform",
+            "label": "id",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_uint256"
+          },
+          {
+            "astId": 34,
+            "contract": "contracts/BountyPlatform.sol:BountyPlatform",
+            "label": "company",
+            "offset": 0,
+            "slot": "1",
+            "type": "t_address"
+          },
+          {
+            "astId": 36,
+            "contract": "contracts/BountyPlatform.sol:BountyPlatform",
+            "label": "name",
+            "offset": 0,
+            "slot": "2",
+            "type": "t_string_storage"
+          },
+          {
+            "astId": 38,
+            "contract": "contracts/BountyPlatform.sol:BountyPlatform",
+            "label": "description",
+            "offset": 0,
+            "slot": "3",
+            "type": "t_string_storage"
+          },
+          {
+            "astId": 40,
+            "contract": "contracts/BountyPlatform.sol:BountyPlatform",
+            "label": "deadline",
+            "offset": 0,
+            "slot": "4",
+            "type": "t_uint256"
+          },
+          {
+            "astId": 42,
+            "contract": "contracts/BountyPlatform.sol:BountyPlatform",
+            "label": "rewardPool",
+            "offset": 0,
+            "slot": "5",
+            "type": "t_uint256"
+          },
+          {
+            "astId": 44,
+            "contract": "contracts/BountyPlatform.sol:BountyPlatform",
+            "label": "isFinalized",
+            "offset": 0,
+            "slot": "6",
+            "type": "t_bool"
+          },
+          {
+            "astId": 46,
+            "contract": "contracts/BountyPlatform.sol:BountyPlatform",
+            "label": "companyJudged",
+            "offset": 1,
+            "slot": "6",
+            "type": "t_bool"
+          }
+        ],
+        "numberOfBytes": "224"
+      },
+      "t_struct(CreatorEntry)62_storage": {
+        "encoding": "inplace",
+        "label": "struct BountyPlatform.CreatorEntry",
+        "members": [
+          {
+            "astId": 49,
+            "contract": "contracts/BountyPlatform.sol:BountyPlatform",
+            "label": "creator",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_address"
+          },
+          {
+            "astId": 51,
+            "contract": "contracts/BountyPlatform.sol:BountyPlatform",
+            "label": "contentURI",
+            "offset": 0,
+            "slot": "1",
+            "type": "t_string_storage"
+          },
+          {
+            "astId": 53,
+            "contract": "contracts/BountyPlatform.sol:BountyPlatform",
+            "label": "upvotes",
+            "offset": 0,
+            "slot": "2",
+            "type": "t_uint256"
+          },
+          {
+            "astId": 55,
+            "contract": "contracts/BountyPlatform.sol:BountyPlatform",
+            "label": "downvotes",
+            "offset": 0,
+            "slot": "3",
+            "type": "t_uint256"
+          },
+          {
+            "astId": 57,
+            "contract": "contracts/BountyPlatform.sol:BountyPlatform",
+            "label": "companyScore",
+            "offset": 0,
+            "slot": "4",
+            "type": "t_uint256"
+          },
+          {
+            "astId": 59,
+            "contract": "contracts/BountyPlatform.sol:BountyPlatform",
+            "label": "totalScore",
+            "offset": 0,
+            "slot": "5",
+            "type": "t_uint256"
+          },
+          {
+            "astId": 61,
+            "contract": "contracts/BountyPlatform.sol:BountyPlatform",
+            "label": "rewardClaimed",
+            "offset": 0,
+            "slot": "6",
+            "type": "t_bool"
+          }
+        ],
+        "numberOfBytes": "224"
+      },
+      "t_struct(VoteStake)71_storage": {
+        "encoding": "inplace",
+        "label": "struct BountyPlatform.VoteStake",
+        "members": [
+          {
+            "astId": 64,
+            "contract": "contracts/BountyPlatform.sol:BountyPlatform",
+            "label": "amount",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_uint256"
+          },
+          {
+            "astId": 66,
+            "contract": "contracts/BountyPlatform.sol:BountyPlatform",
+            "label": "votedFor",
+            "offset": 0,
+            "slot": "1",
+            "type": "t_address"
+          },
+          {
+            "astId": 68,
+            "contract": "contracts/BountyPlatform.sol:BountyPlatform",
+            "label": "isUpvote",
+            "offset": 20,
+            "slot": "1",
+            "type": "t_bool"
+          },
+          {
+            "astId": 70,
+            "contract": "contracts/BountyPlatform.sol:BountyPlatform",
+            "label": "exists",
+            "offset": 21,
+            "slot": "1",
+            "type": "t_bool"
+          }
+        ],
+        "numberOfBytes": "64"
+      },
+      "t_uint256": {
+        "encoding": "inplace",
+        "label": "uint256",
+        "numberOfBytes": "32"
+      }
+    }
+  }
+}

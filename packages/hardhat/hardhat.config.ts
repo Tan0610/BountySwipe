@@ -26,11 +26,12 @@ const config: HardhatUserConfig = {
   solidity: {
     compilers: [
       {
-        version: "0.8.20",
+        version: "0.8.28",
         settings: {
+          viaIR: true,
+          evmVersion: "prague",
           optimizer: {
             enabled: true,
-            // https://docs.soliditylang.org/en/latest/using-the-compiler.html#optimizer-options
             runs: 200,
           },
         },
@@ -54,8 +55,8 @@ const config: HardhatUserConfig = {
       },
     },
     monadTestnet: {
-      url: `https://testnet-rpc.monad.xyz/`,
-      accounts: [deployerPrivateKey],
+      url: "https://testnet-rpc.monad.xyz/",
+      accounts: [process.env.DEPLOYER_PRIVATE_KEY || deployerPrivateKey],
       chainId: 10143,
     },
   },
