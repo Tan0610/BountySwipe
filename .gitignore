@@ -29,8 +29,5 @@ dist
 # Deployment artifacts (local)
 packages/hardhat/deployments/localhost/
 
-# Large video files
-packages/nextjs/public/videos/
-
 # BMAD output
 _bmad-output/
